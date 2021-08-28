@@ -1,0 +1,67 @@
+set +e
+
+install -D -v -m 644 bootloader/extlinux.conf \
+    "$PKGDIR"/boot/extlinux/extlinux.conf
+
+cp -v -r kernel/dtb "$PKGDIR"/boot
+cp -v -r kernel/dtb/* "$PKGDIR"/boot
+
+install -D -v -m 644 kernel/Image \
+    "$PKGDIR"/boot/Image
+install -D -v -m 644 bootloader/l4t_initrd.img \
+    "$PKGDIR"/boot/initrd
+
+cd kernel
+tar -xf kernel_supplements.tbz2
+mkdir -v -p "$PKGDIR"/usr/lib
+cp -v -r lib/modules "$PKGDIR"/usr/lib
+
+cd ..
+cd nv_tegra
+tar -xf nvidia_drivers.tbz2
+tar -xf config.tbz2
+
+install -D -v -m 755 etc/udev/rules.d/99-tegra-devices.rules \
+    "$PKGDIR"/etc/udev/rules.d/99-tegra-devices.rules
+install -D -v -m 755 etc/udev/rules.d/99-tegra-mmc-ra.rules \
+    "$PKGDIR"/etc/udev/rules.d/99-tegra-mmc-ra.rules
+install -D -v -m 755 usr/lib/aarch64-linux-gnu/tegra/nvidia_icd.json \
+    "$PKGDIR"/etc/vulkan/icd.d/nvidia_icd.json
+    
+mkdir -v -p "$PKGDIR"/usr/lib/firmware 
+cp -v -r lib/firmware/brcm "$PKGDIR"/usr/lib/firmware/
+cp -v -r lib/firmware/tegra21x "$PKGDIR"/usr/lib/firmware/
+
+install -D -v -m 644 lib/firmware/bcm4354.hcd \
+    "$PKGDIR"/usr/lib/firmware/bcm4354.hcd
+install -D -v -m 644 lib/firmware/nv-BT-Version \
+    "$PKGDIR"/usr/lib/firmware/nv-BT-Version
+install -D -v -m 644 lib/firmware/tegra21x_xusb_firmware \
+     "$PKGDIR"/usr/lib/firmware/tegra21x_xusb_firmware
+
+mkdir -v -p "$PKGDIR"/usr/lib/libv4l/plugins/nv
+rm -v usr/lib/aarch64-linux-gnu/tegra/libcuda.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvbuf_utils.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvbufsurface.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvbufsurftransform.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvdsbufferpool.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvid_mapper.so
+rm -v usr/lib/aarch64-linux-gnu/tegra/libdrm.so.2
+rm -v usr/lib/aarch64-linux-gnu/tegra/libnvidia-egl-wayland.so
+
+cp -v usr/lib/aarch64-linux-gnu/tegra/lib*.so* "$PKGDIR"/usr/lib/ 
+cp -v usr/lib/aarch64-linux-gnu/tegra-egl/lib*.so* "$PKGDIR"/usr/lib/
+
+
+install -D -v -m 755 usr/lib/xorg/modules/drivers/nvidia_drv.so \
+    "$PKGDIR"/usr/lib/xorg/modules/drivers/nvidia_drv.so
+install -D -v -m 755 usr/lib/xorg/modules/extensions/libglxserver_nvidia.so \
+    "$PKGDIR"/usr/lib/xorg/modules/extensions/libglxserver_nvidia.so
+    
+mkdir -v -p "$PKGDIR"/usr/share
+cp -v -r usr/share/alsa "$PKGDIR"/usr/share/
+cp -v -r usr/share/egl "$PKGDIR"/usr/share/
+
+install -D -v -m 755 etc/X11/xorg.conf.jetson_e \
+    "$PKGDIR"/etc/X11/xorg.conf.d/99-tegra.conf
+

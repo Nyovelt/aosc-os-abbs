@@ -1,0 +1,13 @@
+mkdir -p /lib/firmware/gm20b/
+find /usr/lib/firmware/tegra21x -type f -o -type l | sed 's|^/.*/\(.*\)|\1|' | while read f; do ln -s ../tegra21x/$f /usr/lib/firmware/gm20b/$f; done
+
+ln -sF ../../../libv4l2_nvargus.so /usr/lib/libv4l/plugins/nv/libv4l2_nvargus.so
+ln -sF ../../../libv4l2_nvvidconv.so /usr/lib/libv4l/plugins/nv/libv4l2_nvvidconv.so
+ln -sF ../../../libv4l2_nvvideocodec.so /usr/lib/libv4l/plugins/nv/libv4l2_nvvideocodec.so
+
+ln -sF ./libcuda.so.1.1 /usr/lib/libcuda.so
+ln -sF ./libnvbuf_utils.so.1.0.0 /usr/lib/libnvbuf_utils.so
+ln -sF ./libnvbufsurface.so.1.0.0 /usr/lib/libnvbufsurface.so
+ln -sF ./libnvbufsurftransform.so.1.0.0 /usr/lib/libnvbufsurftransform.so
+ln -sF ./libnvdsbufferpool.so.1.0.0 /usr/lib/libnvdsbufferpool.so
+ln -sF ./libnvid_mapper.so.1.0.0 /usr/lib/libnvid_mapper.so

@@ -1,0 +1,7 @@
+PKGNAME=l4t-tegra210
+PKGSEC=kernel
+PKGDEP=""
+PKGDES="The proprietary drivers for NVIDIA Jetson Nano and TX1 Developer Kit"
+
+FAIL_ARCH="!(arm64)"
+ABSTRIP=0
