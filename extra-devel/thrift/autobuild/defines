@@ -1,0 +1,9 @@
+PKGNAME=thrift
+PKGSEC=devel
+PKGDES="The Apache Thrift software framework for cross-language services development"
+PKGDEP="python-3 openssl zlib"
+BUILDDEP="nodejs openjdk apache-ant"
+
+CMAKE_AFTER="-DBUILD_SHARED_LIBS=ON \
+             -DBUILD_NODEJS=ON \
+             -DBUILD_JAVASCRIPT=OFF"
