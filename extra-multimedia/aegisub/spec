@@ -1,4 +1,4 @@
 VER=3.3.2
 SRCS="tbl::https://github.com/wangqr/Aegisub/archive/refs/tags/v$VER.tar.gz"
-CHKSUMS="SKIP"
+CHKSUMS="sha256::9aaab8e66cef2a72368c6b7f79b2f99700321a7b9a1ca623c5e6be0e65418db5"
 CHKUPDATE="anitya::id=235023"

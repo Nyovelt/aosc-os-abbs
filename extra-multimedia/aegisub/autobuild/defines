@@ -1,12 +1,14 @@
 PKGNAME=aegisub
 PKGSEC=video
-PKGDEP="boost desktop-file-utils ffms2 fftw hunspell wxgtk3 lua"
+PKGDEP="alsa boost desktop-file-utils ffms2 fftw fontconfig glu hunspell icu \
+        libass lua pulseaudio uchardet wxgtk3 zlib"
 BUILDDEP="intltool lua-5.3"
 PKGDES="A free, cross-platform open source tool for creating and modifying subtitles"
 
-AUTOTOOLS_AFTER="--without-portaudio \
-                 --without-openal \
-                 --without-oss \
-                 --disable-update-checker \
-                 --with-wx-config=/usr/lib/wx/config/gtk3-unicode-3.0 agi_cv_luajit_is_52=yes"
+CMAKE_AFTER="-DWITH_OPENAL=OFF \
+             -DWITH_OSS=OFF \
+             -DWITH_PORTAUDIO=OFF \
+             -DWITH_UPDATE_CHECKER=OFF \
+             -DwxWidget_CONFIG_EXECUABLE=/usr/bin/wx-config-gtk3"
+
 ABSHADOW=0
