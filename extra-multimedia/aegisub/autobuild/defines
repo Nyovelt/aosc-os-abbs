@@ -10,6 +10,6 @@ CMAKE_AFTER="-DWITH_OPENAL=OFF \
              -DWITH_OSS=OFF \
              -DWITH_PORTAUDIO=OFF \
              -DWITH_UPDATE_CHECKER=OFF \
-             -DwxWidget_CONFIG_EXECUABLE=/usr/bin/wx-config-gtk3"
+             -DwxWidget_CONFIG_EXECUABLE=/usr/lib/wx/config/gtk3-unicode-3.0"
 
 ABSHADOW=0
