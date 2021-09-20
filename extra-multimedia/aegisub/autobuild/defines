@@ -1,8 +1,8 @@
 PKGNAME=aegisub
 PKGSEC=video
-PKGDEP="alsa-lib boost desktop-file-utils ffms2 fftw fontconfig glu hunspell \
-        icu libass lua pulseaudio uchardet wxgtk3 zlib"
-BUILDDEP="intltool lua-5.3"
+PKGDEP="alsa-lib boost desktop-file-utils ffms2 fftw fontconfig libglvnd \
+        hunspell icu libass luajit pulseaudio uchardet wxgtk3 zlib"
+BUILDDEP="intltool lua-5.3 mesa"
 PKGDES="A free, cross-platform open source tool for creating and modifying subtitles"
 
 ABTYPE=cmakeninja
