@@ -5,6 +5,7 @@ PKGDEP="alsa-lib boost desktop-file-utils ffms2 fftw fontconfig glu hunspell \
 BUILDDEP="intltool lua-5.3"
 PKGDES="A free, cross-platform open source tool for creating and modifying subtitles"
 
+ABTYPE=cmakeninja
 CMAKE_AFTER="-DWITH_OPENAL=OFF \
              -DWITH_OSS=OFF \
              -DWITH_PORTAUDIO=OFF \
