@@ -1,4 +1,4 @@
-VER=3.3.2
-SRCS="tbl::https://github.com/wangqr/Aegisub/archive/refs/tags/v$VER.tar.gz"
-CHKSUMS="sha256::9aaab8e66cef2a72368c6b7f79b2f99700321a7b9a1ca623c5e6be0e65418db5"
+VER=3.3.2+git20210713
+SRCS="git::commit=418a276cc8dbdece4c005318c28e962e2920eb19::https://github.com/wangqr/Aegisub.git"
+CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=235023"
