@@ -1,7 +1,11 @@
 PKGNAME=kdenlive
 PKGSEC=kde
-PKGDEP="cdrkit dvdauthor dvgrab ffmpeg glu kfilemetadata knewstuff \
-        knotifyconfig kplotting libdv mlt plasma-desktop xine-ui"
+PKGDEP="attica5 breeze breeze-icons cdrkit dvdauthor dvgrab frei0r-plugins ffmpeg glu kaccounts-integration \
+	karchive kauth kbookmarks kcmutils kcodecs kcompletion kconfig kconfigwidgets kcoreaddons kcrash \
+        kdbusaddons kdeclarative kded kdoctools kfilemetadata kglobalaccel kguiaddons ki18n kiconthemes \
+        kinit kio kirigami2 kitemviews kjobwidgets knewstuff knotifications knotifyconfig kpackage kplotting \
+        kservice ktextwidgets kwallet kwidgetsaddons kwindowsystem kxmlgui libao libdv libftdi libirman \
+        libxdg-basedir lirc mlt opusfile purpose qt-5 signon-kwallet-extension solid sonnet sox vid.stab xine-ui"
 BUILDDEP="extra-cmake-modules kdoctools mlt"
 PKGDES="A MLT-based non-linear video editor for KDE"
 
