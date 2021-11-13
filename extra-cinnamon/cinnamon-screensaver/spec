@@ -1,4 +1,4 @@
-VER=5.0.5
+VER=5.0.7
 SRCS="tbl::https://github.com/linuxmint/cinnamon-screensaver/archive/$VER.tar.gz"
-CHKSUMS="sha256::4df3ca70968e214cff11665d9495be16307fae0857df0dc21c6ef6762f21786d"
+CHKSUMS="sha256::90903f193749b3bd2da99f0cf8daaa90913cd3a1d88af3daefbb47a10bc6a533"
 CHKUPDATE="anitya::id=6385"
