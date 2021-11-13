@@ -1,4 +1,4 @@
-VER=5.0.1
+VER=5.0.2
 SRCS="tbl::https://github.com/linuxmint/cinnamon-translations/archive/$VER.tar.gz"
-CHKSUMS="sha256::fedb16ec94c020f0d3730da6868ff1fbf00bc4fd5e62980ce50baba537ec5cf7"
+CHKSUMS="sha256::ec92814a0bb679efa068a99bf182cb9fe588235796ae1c46a6819b69818f7266"
 CHKUPDATE="anitya::id=6390"
