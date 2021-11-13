@@ -1,4 +1,4 @@
-VER=1.38.1
+VER=1.41.1
 SRCS="tbl::https://github.com/grpc/grpc/archive/v$VER/grpc-$VER.tar.gz"
-CHKSUMS="sha256::f60e5b112913bf776a22c16a3053cc02cf55e60bf27a959fd54d7aaf8e2da6e8"
+CHKSUMS="sha256::12a4a6f8c06b96e38f8576ded76d0b79bce13efd7560ed22134c2f433bc496ad"
 CHKUPDATE="anitya::id=18429"
