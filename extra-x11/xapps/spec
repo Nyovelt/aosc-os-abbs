@@ -1,4 +1,4 @@
-VER=2.2.2
+VER=2.2.4
 SRCS="tbl::https://github.com/linuxmint/xapps/archive/$VER.tar.gz"
-CHKSUMS="sha256::1384eb5c3ef395aa7736346521639c7b7904f471f4a55ccd415a66c1031e8f75"
+CHKSUMS="sha256::9ede1737d978b308fdcbd63f6b8a4c8e585ff97abe47bd7a58ffc4b3e0e10e6f"
 CHKUPDATE="anitya::id=12203"
