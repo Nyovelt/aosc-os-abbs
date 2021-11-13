@@ -1,4 +1,4 @@
-VER=5.0.1
+VER=5.0.5
 SRCS="tbl::https://github.com/linuxmint/nemo/archive/$VER.tar.gz"
-CHKSUMS="sha256::bc2171d1ee55ff68540dc8fb688157bf69ca1207449b1623b03c299eca39c919"
+CHKSUMS="sha256::fe4b2ece1b985c7f4dcc2aaa4b50216173828965dcb9a3222bf33713d9b99ca2"
 CHKUPDATE="anitya::id=6391"
