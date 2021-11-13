@@ -1,4 +1,4 @@
-VER=5.0.2
+VER=5.0.7
 SRCS="tbl::https://github.com/linuxmint/Cinnamon/archive/$VER.tar.gz"
-CHKSUMS="sha256::9ae7043a56eedd9fb0ec253d7f4513087cc431179824341d87a1828d2e094b13"
+CHKSUMS="sha256::332409bd9fbc66e98f23c87c8ec22da9211b3425cb6f8a736f15e83a95041d2f"
 CHKUPDATE="anitya::id=6265"
