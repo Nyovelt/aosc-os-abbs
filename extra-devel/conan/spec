@@ -1,4 +1,4 @@
-VER=1.39.0
+VER=1.42.1
 SRCS="tbl::https://github.com/conan-io/conan/archive/refs/tags/$VER.tar.gz"
-CHKSUMS="sha256::4ee6daadf2fc19f9f311cb9a187d90e7ea3eb90674c86fad607f77ccaace6203"
+CHKSUMS="sha256::8655143675e0b0fbed237d0aa294910f4548a17de2dc56dc659c293393503262"
 CHKUPDATE="anitya::id=234751"
