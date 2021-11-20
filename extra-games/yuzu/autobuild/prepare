@@ -1,2 +1,4 @@
 # cmake is now allergic to extra whitespaces, see CMake docs for CMP0004 for more information
 export LDFLAGS="$(xargs <<< $LDFLAGS)"
+export TITLEBARFORMATIDLE="yuzu {}"
+export TITLEBARFORMATRUNNING="yuzu {} | {}"
