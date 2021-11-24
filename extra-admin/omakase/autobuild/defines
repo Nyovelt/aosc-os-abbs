@@ -1,0 +1,8 @@
+PKGNAME=omakase
+PKGSEC=utils
+PKGDEP="nettle"
+BUILDDEP="rustc llvm"
+PKGDES="Declartive package manager"
+
+USECLANG=1
+FAIL_ARCH="!(amd64|arm64)"
