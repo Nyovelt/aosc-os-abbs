@@ -1,0 +1,7 @@
+arch = "amd64"
+
+[repo.aosc]
+url = "https://repo.aosc.io/debs"
+distribution = "stable"
+components = ["main"]
+keys = ["aosc.gpg"]
