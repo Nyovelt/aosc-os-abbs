@@ -1,5 +1,4 @@
-VER=5.0.6
-REL=1
+VER=5.0.9
 SRCS="tbl::https://github.com/fcitx/fcitx5-chinese-addons/archive/$VER.tar.gz \
       tbl::https://download.fcitx-im.org/fcitx5/fcitx5-chinese-addons/fcitx5-chinese-addons-${VER}_dict.tar.xz"
 CHKSUMS="sha256::3269e1a5fd4a3edadd7947164843f3978e29b53eddb42ecf93879e1113c88fcd \
