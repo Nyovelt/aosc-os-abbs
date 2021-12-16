@@ -1,4 +1,5 @@
 VER=16.2.6
+REL=1
 SRCS="https://download.ceph.com/tarballs/ceph-$VER.tar.gz"
 CHKSUMS="sha256::4d71b2667c954d801fec6ec1713bf77407caff9e097ce28e6dcc934610ab9d80"
 CHKUPDATE="anitya::id=267"
