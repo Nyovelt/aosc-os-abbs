@@ -1,5 +1,4 @@
-VER=723
-REL=1
+VER=848
 SRCS="git::commit=tags/mainline-0-${VER}::https://github.com/yuzu-emu/yuzu-mainline"
 CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=227696"
