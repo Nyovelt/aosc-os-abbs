@@ -1,4 +1,5 @@
 VER=4.8
+REL=1
 SRCS="https://sourceforge.net/projects/gnucash/files/gnucash%20%28stable%29/$VER/gnucash-$VER.tar.bz2 \
       https://sourceforge.net/projects/gnucash/files/gnucash%20%28stable%29/$VER/gnucash-docs-$VER.tar.gz"
 CHKSUMS="sha256::15b8e4ff8336168eba88ef2faade377e5c5ff08e48b4660da1a33a8a407feb12 \
