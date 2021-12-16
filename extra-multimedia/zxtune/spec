@@ -1,4 +1,4 @@
-VER=5000
-SRCS="git::commit=tags/r$VER::https://bitbucket.org/zxtune/zxtune/"
+VER=5000+git20211105
+SRCS="git::commit=425877a97ff78c3b96bfa7a8105fb5820dff3e36::https://bitbucket.org/zxtune/zxtune/"
 CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=230958"
