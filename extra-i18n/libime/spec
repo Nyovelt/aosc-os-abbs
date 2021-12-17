@@ -2,6 +2,6 @@ VER=1.0.10
 SRCS="git::commit=tags/$VER::https://github.com/fcitx/libime/ \
       tbl::https://download.fcitx-im.org/fcitx5/libime/libime-${VER}_dict.tar.xz"
 CHKSUMS="SKIP \
-         sha256::4d979937f4d2605ec0e43aebb94165301d0e9d64e000a47207100f8c67e8551b"
+         sha256::0ee07905cf67c70ab37688517bcde2eb902b60f0e7e634aa9a4615478beb7636"
 CHKUPDATE="anitya::id=138236"
 SUBDIR="libime-$VER"
