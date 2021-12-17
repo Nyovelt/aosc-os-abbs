@@ -1,4 +1,5 @@
 PKGNAME=gr-iqbal
+PKGEPOCH=1
 PKGDES="GNU Radio block to correct IQ imbalance in quadrature receivers"
 PKGDEP="gnuradio fftw"
 BUILDDEP="cmake pybind11 boost ninja"
