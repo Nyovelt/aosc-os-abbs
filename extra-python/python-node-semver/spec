@@ -1,4 +1,5 @@
-VER=0.6.1
-SRCS="tbl::https://github.com/podhmo/python-semver/archive/refs/tags/$VER.tar.gz"
-CHKSUMS="sha256::442252eea5feb6ad797a3443609010cf5af26201681597283759060bfa3588ef"
+VER=0.8.1
+REL=1
+SRCS="tbl::https://files.pythonhosted.org/packages/source/n/node-semver/node-semver-$VER.tar.gz"
+CHKSUMS="sha256::281600d009606f4f63ddcbe148992e235b39a69937b9c20359e2f4a2adbb1e00"
 CHKUPDATE="anitya::id=50150"
