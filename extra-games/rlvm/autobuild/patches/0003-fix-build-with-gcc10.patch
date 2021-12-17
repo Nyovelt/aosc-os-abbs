@@ -1,0 +1,10 @@
+--- rlvm/src/systems/base/system.h     2021-12-17 03:59:01.932977896 +0000
++++ rlvm-new/src/systems/base/system.h 2021-12-17 03:50:32.235346202 +0000
+@@ -33,6 +33,7 @@
+ #include <boost/filesystem/path.hpp>
+ 
+ #include <map>
++#include <memory>
+ #include <sstream>
+ #include <string>
+ #include <utility>
