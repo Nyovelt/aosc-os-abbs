@@ -1,5 +1,4 @@
-VER=2.8.1
-REL=3
+VER=2.13.0
 SRCS="tbl::https://pypi.io/packages/source/s/semver/semver-$VER.tar.gz"
-CHKSUMS="sha256::5b09010a66d9a3837211bb7ae5a20d10ba88f8cb49e92cb139a69ef90d5060d8"
+CHKSUMS="sha256::fa0fe2722ee1c3f57eac478820c3a5ae2f624af8264cbdf9000c980ff7f75e3f"
 CHKUPDATE="anitya::id=35351"
