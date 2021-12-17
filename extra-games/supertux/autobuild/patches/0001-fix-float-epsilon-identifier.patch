@@ -1,0 +1,11 @@
+--- a/src/supertux/game_session.cpp    2021-12-17 03:33:06.114632125 +0000
++++ b/src/supertux/game_session.cpp    2021-12-17 03:33:18.497810907 +0000
+@@ -162,7 +162,7 @@
+     if (m_end_sequence)
+       m_end_sequence->stop();
+ 
+-    m_currentsector->get_player().m_dying_timer.start(FLT_EPSILON);
++    m_currentsector->get_player().m_dying_timer.start(__FLT_EPSILON__);
+     return;   // don't let the player open the menu, when Tux is dying
+   }
+ 
