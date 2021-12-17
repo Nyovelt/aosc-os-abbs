@@ -1,7 +1,7 @@
 VER=5.0.9
 SRCS="tbl::https://github.com/fcitx/fcitx5-chinese-addons/archive/$VER.tar.gz \
       tbl::https://download.fcitx-im.org/fcitx5/fcitx5-chinese-addons/fcitx5-chinese-addons-${VER}_dict.tar.xz"
-CHKSUMS="sha256::3269e1a5fd4a3edadd7947164843f3978e29b53eddb42ecf93879e1113c88fcd \
-         sha256::09e1bd5d21731a2d7e939f36df34eb473977f0193ad5d28d0b1d54c7ee338786"
+CHKSUMS="sha256::54c0b71f797128b8550544de7762ede35a87786d9e5946db94c1db96ef3169e0 \
+         sha256::44d8688e83380657a1bac98fff434422ac48b138d96dfdf12e7de500a9a275c2"
 CHKUPDATE="anitya::id=138238"
 SUBDIR="fcitx5-chinese-addons-$VER"
