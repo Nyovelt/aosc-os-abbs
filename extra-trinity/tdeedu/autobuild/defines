@@ -1,6 +1,6 @@
 PKGNAME=tdeedu
 PKGSEC=Trinity
-PKGDEP="tdelibs"
+PKGDEP="tdelibs tde-common-cmake"
 BUILDDEP="doxygen"
 PKGDES="Educational applications for Trinity Desktop Environment"
 
