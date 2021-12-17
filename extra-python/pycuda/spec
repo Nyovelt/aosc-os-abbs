@@ -1,4 +1,4 @@
 VER=2021.1
 SRCS="tbl::https://github.com/inducer/pycuda/archive/v$VER.tar.gz"
-CHKSUMS="sha256::560f68940be58a6b0c919ca341dcdcab67b98a909b5e1f2edde578312dc6d8fe"
+CHKSUMS="sha256::bbf4b074449a82e8d8c6ff8705d28ba6a1ee8d7f3f6c2c20a58a42cbfed4956d"
 CHKUPDATE="anitya::id=187675"
