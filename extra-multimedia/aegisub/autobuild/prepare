@@ -5,5 +5,14 @@ sed -e 's/$(LIBS_BOOST) $(LIBS_ICU)/$(LIBS_BOOST) $(LIBS_ICU) -pthread/' \
 abinfo 'Patching build versioning script to let it run properly...'
 sed -e 's/return 0/exit 0/g' -i "$SRCDIR"/build/version.sh
 
+abinfo 'Detecting architecure to generate correct luajit header ...'
+if [[ "${CROSS:-$ARCH}" = "arm64" ]]; then
+    sed -e 's/vm_x86.dasc/vm_arm64.dasc/g' -i "$SRCDIR"/CMakeLists.txt
+elif [[ "${CROSS:-$ARCH}" = "loongson3" ]]; then
+    sed -e 's/vm_x86.dasc/vm_mips64.dasc/g' -i "$SRCDIR"/CMakeLists.txt
+elif [[ "${CROSS:-$ARCH}" = "ppc64el" ]]; then
+    sed -e 's/vm_x86.dasc/vm_ppc.dasc/g' -i "$SRCDIR"/CMakeLists.txt
+fi
+
 # copy .git folder so version.sh will know this is a git repo
 acbs_copy_git
