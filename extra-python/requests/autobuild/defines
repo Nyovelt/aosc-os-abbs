@@ -1,6 +1,6 @@
 PKGNAME=requests
 PKGSEC=python
-PKGDEP="certifi chardet idna urllib3"
+PKGDEP="certifi chardet idna urllib3 charset-normalizer"
 BUILDDEP="setuptools"
 PKGDES="Python HTTP Requests for Humans (TM)"
 
