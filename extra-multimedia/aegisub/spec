@@ -1,4 +1,4 @@
-VER=3.3.2+git20210713
-SRCS="git::commit=418a276cc8dbdece4c005318c28e962e2920eb19::https://github.com/wangqr/Aegisub.git"
+VER=3.3.2+git20211004
+SRCS="git::commit=f8dca9f6386299ec2f90158e2d923a8fb30e3466::https://github.com/wangqr/Aegisub.git"
 CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=235023"
