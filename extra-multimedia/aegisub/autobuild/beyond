@@ -1,0 +1,4 @@
+abinfo 'Copying the automation scripts...'
+mkdir -pv "$PKGDIR"/usr/share/aegisub/automation
+cp -rv "$SRCDIR"/automation/{autoload,demos,include} \
+       "$PKGDIR"/usr/share/aegisub/automation
