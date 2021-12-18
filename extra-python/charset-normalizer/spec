@@ -1,0 +1,3 @@
+VER=2.0.9
+SRCS="https://pypi.io/packages/source/c/charset-normalizer/charset-normalizer-${VER}.tar.gz"
+CHKSUMS="sha256::b0b883e8e874edfdece9c28f314e3dd5badf067342e42fb162203335ae61aa2c"

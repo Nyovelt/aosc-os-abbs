@@ -1,0 +1,7 @@
+PKGNAME=charset-normalizer
+PKGSEC=python
+PKGDES="A library that helps you read text from an unknown charset encoding"
+PKGDEP="python-3"
+
+NOPYTHON2=1
+ABHOST=noarch
