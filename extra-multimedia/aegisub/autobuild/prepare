@@ -2,9 +2,6 @@ abinfo 'Patching to add missing link flag...'
 sed -e 's/$(LIBS_BOOST) $(LIBS_ICU)/$(LIBS_BOOST) $(LIBS_ICU) -pthread/' \
     -i "$SRCDIR"/tools/Makefile
 
-abinfo 'Patching build versioning script to let it run properly...'
-sed -e 's/return 0/exit 0/g' -i "$SRCDIR"/build/version.sh
-
 abinfo 'Detecting architecure to generate correct luajit header ...'
 if [[ "${CROSS:-$ARCH}" = "arm64" ]]; then
     sed -e 's/vm_x86.dasc/vm_arm64.dasc/g' -i "$SRCDIR"/CMakeLists.txt
