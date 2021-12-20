@@ -1,4 +1,4 @@
-VER=2.15
+VER=2.15.1
 SRCS="tbl::https://github.com/csete/gqrx/archive/v$VER.tar.gz"
 CHKSUMS="sha256::f606fa4773b7d4479cef57097ddd06a3ba99371aaa16d37a3c6416af83f653d3"
 CHKUPDATE="anitya::id=9771"
