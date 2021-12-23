@@ -1,0 +1,8 @@
+# This is the main blueprint file for Omakase.
+# Each non-comment represents a package request.
+#
+# Examples:
+# vim                       # A simple request
+# vim (>= 8.0.0)            # Request package within certain range of version
+# vim (>= 8.0.0, <= 9.0.0)  # Multiple parameters can be used
+

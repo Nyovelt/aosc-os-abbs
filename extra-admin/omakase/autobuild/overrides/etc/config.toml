@@ -1,5 +1,4 @@
 arch = "amd64"
-purge_on_remove = false
 
 [repo.aosc]
 url = "https://repo.aosc.io/debs"
