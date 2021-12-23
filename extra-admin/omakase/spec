@@ -1,3 +1,4 @@
 VER=0.1.0~beta.3
+REL=1
 SRCS="git::commit=tags/0.1.0-beta.3::https://github.com/AOSC-Dev/omakase"
 CHKSUMS="SKIP"

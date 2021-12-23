@@ -1,0 +1,6 @@
+if [[ -s /etc/omakase/blueprint ]]; then
+    echo "Old user blueprint location detected. Migrating to new location"
+    cat /etc/omakase/blueprint >> /etc/omakase/user.blueprint
+    rm /etc/omakase/blueprint
+    echo "Migration complete. You can now access user blueprint at /etc/omakase/user.blueprint"
+fi
