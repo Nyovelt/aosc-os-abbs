@@ -1,3 +1,3 @@
-VER=0.1.0~beta.4
-SRCS="git::commit=tags/0.1.0-beta.4::https://github.com/AOSC-Dev/omakase"
+VER=0.1.0~beta.5
+SRCS="git::commit=tags/0.1.0-beta.5::https://github.com/AOSC-Dev/omakase"
 CHKSUMS="SKIP"
