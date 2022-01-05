@@ -1,6 +1,6 @@
 PKGNAME=oce
 PKGDES="A C++ 3D library that is suitable for CAD/CAM softwares"
 PKGSEC=libs
-PKGDEP="x11-lib mesa glu freetype"
+PKGDEP="x11-lib mesa glu freetype tcl tk"
 
-CMAKE_AFTER="-DOCE_INSTALL_PREFIX=/usr"
+PKGBREAK="kicad<=5.1.12-0"

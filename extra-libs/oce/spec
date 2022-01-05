@@ -1,5 +1,4 @@
-VER=0.18.3
-REL=2
-SRCS="tbl::https://github.com/tpaviot/oce/archive/OCE-${VER}.tar.gz"
-CHKSUMS="sha256::c553d6a7bf52f790abc3b6bb7a1e91a65947e92a426bb1a88a11960c31f0966c"
+VER=7.4.0+git20210208
+SRCS="git::commit=98a788062f0f30593880b0df1bcf967408212ba4::https://github.com/tpaviot/oce.git"
+CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=9629"
