@@ -2,3 +2,4 @@ VER=0.6.0
 SRCS="git::commit=tags/v$VER::https://github.com/helix-editor/helix"
 CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=219661"
+REL=1
