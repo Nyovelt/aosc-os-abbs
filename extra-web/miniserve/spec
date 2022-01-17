@@ -2,3 +2,4 @@ VER=0.18.0
 SRCS="tbl::https://github.com/svenstaro/miniserve/archive/v$VER.tar.gz"
 CHKSUMS="sha256::24860f103879fd881a522a7ad8f25f2c9dcd5e01287b0485bcabf3e88c719015"
 CHKUPDATE="anitya::id=231970"
+REL=1
