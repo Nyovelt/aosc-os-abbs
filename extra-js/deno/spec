@@ -1,4 +1,4 @@
-VER=1.16.4
+VER=1.17.3
 SRCS="tbl::https://github.com/denoland/deno/releases/download/v$VER/deno_src.tar.gz"
-CHKSUMS="sha256::f2f64009ea18e6b9b541f2b62a01e9b06e2a672ff652887e6c0087ffceb3a61e"
+CHKSUMS="sha256::1404a59d06fbf424062af39a76216f6e181ca7c5876e3431768f8266ad4000a6"
 CHKUPDATE="anitya::id=133196"
