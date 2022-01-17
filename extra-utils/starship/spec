@@ -1,5 +1,4 @@
-VER=1.0.0
-REL=1
+VER=1.2.1
 SRCS="tbl::https://github.com/starship/starship/archive/v$VER.tar.gz"
-CHKSUMS="sha256::a66d47758b3dac4f1a626bb175c4847a2ef266540498a9f25222e715baf9f9db"
+CHKSUMS="sha256::22ad1622fd30297cc0ba2de67316e7df07c44cabe716bcbda3a5cb0d12375c98"
 CHKUPDATE="anitya::id=55456"
