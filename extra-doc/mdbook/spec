@@ -1,4 +1,4 @@
-VER=0.4.14
+VER=0.4.15
 SRCS="tbl::https://github.com/rust-lang/mdBook/archive/refs/tags/v$VER.tar.gz"
-CHKSUMS="sha256::59fd3e417e9d09deac89e20467194dd9f93854c2f1a87e845816c5cec676765c"
+CHKSUMS="sha256::fa7f217fb6be229c25be21ccb712af8d0012241b529d1bbacb8f5cac65fe0013"
 CHKUPDATE="anitya::id=241825"
