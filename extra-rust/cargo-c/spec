@@ -1,4 +1,5 @@
 VER=0.9.6
+REL=1
 SRCS="tbl::https://github.com/lu-zero/cargo-c/archive/refs/tags/v$VER.tar.gz \
       file::rename=Cargo.lock::https://github.com/lu-zero/cargo-c/releases/download/v$VER/Cargo.lock"
 CHKUPDATE="anitya::id=58394"
