@@ -1,4 +1,4 @@
-VER=0.18.6
+VER=0.19.1
 SRCS="tbl::https://github.com/sunng87/cargo-release/archive/refs/tags/v$VER.tar.gz"
-CHKSUMS="sha256::ffafc8c9812d84c04486b23ceeda8717a814b5543d2c2908fa4ef024f76ab78b"
+CHKSUMS="sha256::24214592d14e3d6b4b3b9650c685645ac2081b41c6ea1fb5b0dc5b00f1e9ea61"
 CHKUPDATE="anitya::id=231456"
