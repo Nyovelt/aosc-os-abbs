@@ -2,3 +2,4 @@ VER=0.5.1
 SRCS="https://github.com/AOSC-Dev/atm/archive/v${VER/\~/-}.tar.gz"
 CHKSUMS="sha256::9187a5cca674e43e82b5997f1440e65a303b528a4fda6f7ff7e441fd0f753876"
 CHKUPDATE="anitya::id=226686"
+REL=1
