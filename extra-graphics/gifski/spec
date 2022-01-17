@@ -1,4 +1,4 @@
-VER=1.5.1
+VER=1.6.3
 SRCS="tbl::https://github.com/ImageOptim/gifski/archive/${VER}.tar.gz"
-CHKSUMS="sha256::88beeb896b6a1138046f665c3495f85670a74a527e34743080d8976d3f1b73b7"
+CHKSUMS="sha256::4cef85a40868de3ef2fa7d46dda892c16dad492610f143efa129e41fa9248403"
 CHKUPDATE="anitya::id=232227"
