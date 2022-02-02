@@ -1,5 +1,4 @@
-VER=2.2.19.0
-REL=1
+VER=2.2.20.0
 SRCS="tbl::https://github.com/OpenImageIO/oiio/archive/Release-$VER.tar.gz"
-CHKSUMS="sha256::8f7b10bfe64c33077a163ab2a034d3085ce8f712413f33ef4020cfd07c2e10dc"
+CHKSUMS="sha256::859f393e4533dab3b001d881c41fd4e0a3ea114e159f00d7b2aa25fa98e97f99"
 CHKUPDATE="anitya::id=2548"

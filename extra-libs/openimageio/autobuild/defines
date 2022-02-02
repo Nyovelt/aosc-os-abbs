@@ -1,17 +1,22 @@
 PKGNAME=openimageio
 PKGSEC=libs
 PKGDEP="boost glew jasper libraw libtiff opencolorio opencv \
-        openexr openssl pugixml libheif"
+        openexr openssl pugixml libheif fmt"
 BUILDDEP="cmake pybind11"
 PKGDES="A library for reading and writing images, including classes, utilities, and applications"
+
+# These paths will be checked for existence in prepare
+__LIBRAW="/usr/lib/libraw.so.20"
+__LIBJPEG_TURBO="/usr/lib/libturbojpeg.so.0"
+__LIBJPEG="/usr/lib/libjpeg.so.8"
 
 CMAKE_AFTER="-DUSE_EXTERNAL_PUGIXML=ON \
              -DPUGIXML_HOME=/usr \
              -DOIIO_BUILD_TOOLS=ON \
              -DUSE_PYTHON=ON \
-             -DJPEG_PATH=/usr/lib/libjpeg.so.8 \
-             -DJPEGTURBO_PATH=/usr/lib/libturbojpeg.so.0 \
-             -DLIBRAW_PATH=/usr/libraw.so.16 \
+             -DJPEG_PATH=${__LIBJPEG} \
+             -DJPEGTURBO_PATH=${__LIBJPEG_TURBO} \
+             -DLIBRAW_PATH=${__LIBRAW} \
              -DUSE_FFMPEG=OFF \
              -DINSTALL_DOCS=OFF \
              -DINSTALL_FONTS=OFF \

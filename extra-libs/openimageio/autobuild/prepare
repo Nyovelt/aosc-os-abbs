@@ -1,1 +1,11 @@
+abinfo "Turn off werrors"
 export CXXFLAGS="${CXXFLAGS} -Wno-error=aligned-new= -Wno-error=noexcept-type -Wno-error=maybe-uninitialized -Wno-error=format-truncation= -Wno-error=deprecated-declarations"
+
+abinfo "Checking hard-coded .so paths"
+for i in LIBJPEG LIBJPEG_TURBO LIBRAW; do
+	__LIB="__${i}"
+	if ! [[ -f ${!__LIB} ]]; then
+		aberr "$i was set to ${!__LIB} but the file is missing"
+		abdie
+	fi
+done
