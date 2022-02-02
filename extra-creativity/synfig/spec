@@ -1,4 +1,5 @@
 VER=1.5.0
+REL=1
 SRCS="tbl::https://github.com/synfig/synfig/archive/refs/tags/v$VER.tar.gz"
 CHKSUMS="sha256::4a346fa32eefdc65ef02ea1596380423a5517018b064da433efeeee3cc6dc960"
 CHKUPDATE="anitya::id=4924"
