@@ -1,4 +1,4 @@
-VER=7.1.0+19
+VER=7.1.0+22
 SRCS="tbl::http://www.imagemagick.org/download/releases/ImageMagick-${VER/+/-}.tar.xz"
-CHKSUMS="sha256::3fd79174ab0f30bc1643af3e654f1d2ffcc3a9554263981155688b4f49f7fd77"
+CHKSUMS="sha256::8b02ffda73a0163a8341638b5603d955ff7258798d8d0194577ffa928cbb97a8"
 CHKUPDATE="anitya::id=1372"
