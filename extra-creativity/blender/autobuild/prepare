@@ -1,3 +1,6 @@
+export CFLAGS="-I/usr/include/Imath ${CFLAGS}"
+export CXXFLAGS="-I/usr/include/Imath ${CXXFLAGS}"
+
 # FIXME: workaround incorrect vectorization on PPC64.
 if [[ "${CROSS:-$ARCH}" = "ppc64" ]]; then
     export CFLAGS="${CFLAGS/-maltivec -maltivec=be -mabi=altivec/} -mno-altivec -fno-tree-vectorize"

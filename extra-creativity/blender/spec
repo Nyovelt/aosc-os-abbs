@@ -1,5 +1,4 @@
-VER=2.93.5
-REL=1
+VER=2.93.7
 SRCS="tbl::https://download.blender.org/source/blender-$VER.tar.xz"
-CHKSUMS="sha256::d22df1babec8b6ecfe5d3344885288c57afca95ca9185f3fe165220810475cbb"
+CHKSUMS="sha256::9ce43552f6d33af6e15d5031b051781853b222b4348523008ab2e749ba72604a"
 CHKUPDATE="anitya::id=201"
