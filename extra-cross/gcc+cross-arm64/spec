@@ -1,10 +1,8 @@
-VER=9.2.1
-# cth: for some reason git insists that this commit is not a tree
-#GITSRC="https://github.com/gcc-mirror/gcc.git"
-GITCO="7a1e20db49f5b2cb192716ac58cbd22ab1a3304f"
-
-# FIXME: using tarball from github for now
-SRCS="tbl::https://github.com/gcc-mirror/gcc/archive/${GITCO}.tar.gz"
-CHKSUMS="sha256::5f0e9aa15f4407fd106265fed87cdf802a739b944fd8106e4bb06f78798a163f"
-
+VER=11.2.0
+SRCS="
+	tbl::https://ftp.gnu.org/gnu/gcc/gcc-$VER/gcc-$VER.tar.xz
+	file::rename=sysroot.tar.xz::https://releases.aosc.io/os-arm64/container/aosc-os_container_20220122_arm64.tar.xz
+"
+CHKSUMS="sha256::d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b \
+         sha256::62378cd26fe6f122e2a1b6521c7f1bdea83ae8792151f9228d4ef48b9303b238"
 CHKUPDATE="anitya::id=6502"
