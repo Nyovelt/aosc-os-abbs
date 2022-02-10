@@ -1,0 +1,8 @@
+abinfo "Creating clean sysroot"
+rm -rf /var/ab/cross-root/loongson3
+mkdir -p /var/ab/cross-root/loongson3
+tar -C /var/ab/cross-root/loongson3 \
+	--seek \
+	-f "${SRCDIR}/../sysroot.tar.xz" \
+	-vx "usr/lib" "usr/include" || abdie
+

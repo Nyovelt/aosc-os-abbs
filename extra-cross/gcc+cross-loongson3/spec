@@ -1,4 +1,8 @@
-VER=9.3.1
-SRCS="git::commit=93c2834e92419abf04fd9f54ca25ed22086611b0::https://github.com/gcc-mirror/gcc"
-CHKSUMS="SKIP"
+VER=11.2.0
+SRCS="
+	tbl::https://ftp.gnu.org/gnu/gcc/gcc-$VER/gcc-$VER.tar.xz
+	file::rename=sysroot.tar.xz::https://releases.aosc.io/os-loongson3/container/aosc-os_container_20220122_loongson3.tar.xz
+"
+CHKSUMS="sha256::d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b \
+         sha256::4dc188ac5fc52d6d30d002daf259a5d967419ca72d98c9b996adea88c589f813"
 CHKUPDATE="anitya::id=6502"
