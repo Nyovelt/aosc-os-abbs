@@ -2,6 +2,4 @@ PKGNAME="flit-core"
 PKGSEC="python"
 PKGDES="A simple PEP 517 build backend"
 PKGDEP="python-3"
-ABTYPE="python"
-NOPYTHON2=1
 ABSPLITDBG=0
