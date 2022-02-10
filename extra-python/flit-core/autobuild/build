@@ -1,0 +1,1 @@
+(cd "${SRCDIR}/flit_core"; python3 -m pip install . --no-build-isolation --use-pep517 --no-deps ; done

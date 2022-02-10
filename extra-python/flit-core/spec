@@ -1,0 +1,4 @@
+VER=3.6.0
+SRCS="tbl::https://pypi.org/packages/source/f/flit-core/flit_core-${VER}.tar.gz"
+CHKSUMS="sha256::5892962ab8b8ea945835b3a288fe9dd69316f1903d5288c3f5cafdcdd04756ad"
+CHKUPDATE="anitya::id=44841"
