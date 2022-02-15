@@ -1,4 +1,4 @@
-VER=9.3.1
-SRCS="git::commit=93c2834e92419abf04fd9f54ca25ed22086611b0::https://github.com/gcc-mirror/gcc"
-CHKSUMS="SKIP"
+VER=11.2.0
+SRCS="tbl::https://ftp.gnu.org/gnu/gcc/gcc-$VER/gcc-$VER.tar.xz"
+CHKSUMS="sha256::d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b"
 CHKUPDATE="anitya::id=6502"

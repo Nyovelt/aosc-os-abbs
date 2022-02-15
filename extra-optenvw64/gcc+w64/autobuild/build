@@ -18,6 +18,7 @@ for _target in ${_targets}; do
                       --enable-languages=c,lto,c++,fortran \
                       --enable-shared --enable-static \
                       --enable-threads=posix --enable-fully-dynamic-string \
+                      --enable-__cxa_atexit \
                       --enable-libstdcxx-time=yes \
                       --with-system-zlib \
                       --disable-win32-registry \
