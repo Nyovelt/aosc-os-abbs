@@ -1,5 +1,7 @@
 _targets="i686-w64-mingw32 x86_64-w64-mingw32"
 
+export CFLAGS+=" -I/opt/w64/include/"
+
 # Phase 1. headers
 
 for _target in ${_targets}; do
@@ -19,6 +21,7 @@ for _target in ${_targets}; do
     elif [ ${_target} == "x86_64-w64-mingw32" ]; then
         _crt_configure_args="--disable-lib32 --enable-lib64"
     fi
+    export CFLAGS=" -I${PKGDIR}/opt/w64/${_target}/include/ "
     mkdir $SRCDIR/rt-build-${_target} && cd $SRCDIR/rt-build-${_target}
     $SRCDIR/mingw-w64-crt/configure --prefix=/opt/w64/${_target} \
         --host=${_target} --enable-wildcard \
@@ -31,6 +34,7 @@ done
 
 for _target in ${_targets}; do
     mkdir $SRCDIR/pth-build-${_target} && cd $SRCDIR/pth-build-${_target}
+    export CFLAGS=" -I${PKGDIR}/opt/w64/${_target}/include/ "
     $SRCDIR/mingw-w64-libraries/winpthreads/configure \
         --prefix=/opt/w64/${_target} \
         --host=${_target} --enable-static \
