@@ -1,5 +1,4 @@
-VER=1.0.3
-SRCS="https://pypi.io/packages/source/p/poetry-core/poetry-core-${VER}.tar.gz"
-CHKSUMS="sha256::2315c928249fc3207801a81868b64c66273077b26c8d8da465dccf8f488c90c5"
+VER=1.0.7
+SRCS="tbl::https://pypi.io/packages/source/p/poetry-core/poetry-core-${VER}.tar.gz"
+CHKSUMS="sha256::98c11c755a16ef6c5673c22ca94a3802a7df4746a0853a70b6fae8b9f5cac206"
 CHKUPDATE="anitya::id=71155"
-REL=1
