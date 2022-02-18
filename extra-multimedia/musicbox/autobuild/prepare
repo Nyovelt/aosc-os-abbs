@@ -1,5 +1,3 @@
-abinfo "Remove the unneccessary importlib-metadata dependency for Python3.8 from the poetry configure file"
+abinfo "Remove the unneccessary importlib-metadata dependency for Python3.8 from the pyproject.toml and setup.py"
+sed -i '/importlib-metadata/d' setup.py
 sed -i 's|importlib-metadata = "^2.0.0"||' pyproject.toml
-
-abinfo "Generating the setup.py from the poetry configure file"
-dephell deps convert --from pyproject.toml --to setup.py
