@@ -1,4 +1,4 @@
-VER=58.4.0
+VER=60.9.3
 SRCS="tbl::https://github.com/pypa/setuptools/archive/v$VER.tar.gz"
-CHKSUMS="sha256::07d2037202fc0b30e7f960b6e0bbd812357146c316c01becfb0aa89448ffb21c"
+CHKSUMS="sha256::ab13a495c6534a9a6130268564c5a1eba418152d33568bf04a53ddbe56659126"
 CHKUPDATE="anitya::id=4021"
