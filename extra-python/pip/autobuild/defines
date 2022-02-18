@@ -1,7 +1,7 @@
 PKGNAME=pip
 PKGDES="PyPA recommended tool to install Python packages"
 PKGSEC=python
-PKGDEP="setuptools flit-core poetry-core"
+PKGDEP="setuptools flit-core"
 
 ABHOST=noarch
 NOPYTHON2=1
