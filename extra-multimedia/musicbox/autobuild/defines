@@ -1,8 +1,8 @@
 PKGNAME=musicbox
 PKGSEC=sound
-PKGDEP="requests requests-cache fuzzywuzzy pycryptodome future \
+PKGDEP="python-3 requests requests-cache fuzzywuzzy pycryptodome future \
         mpg123 pycryptodomex pyqt5 dbus-python libnotify"
-BUILDDEP="setuptools dephell"
+BUILDDEP="setuptools pip"
 PKGDES="CLI Version of Netease-CloudMusic"
 
 NOPYTHON2=1
