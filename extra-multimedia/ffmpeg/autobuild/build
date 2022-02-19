@@ -35,6 +35,7 @@ if [[ "${CROSS:-$ARCH}" != "i486" && "${CROSS:-$ARCH}" != "powerpc" && "${CROSS:
                 --disable-static \
                 --disable-stripping \
                 --disable-avisynth \
+                --enable-vapoursynth \
                 --enable-fontconfig \
                 --enable-gnutls \
                 --enable-gpl \
