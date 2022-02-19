@@ -1,4 +1,5 @@
 VER=2.14.8
+REL=1
 SRCS="https://downloads.sourceforge.net/project/pidgin/Pidgin/$VER/pidgin-$VER.tar.bz2"
 CHKSUMS="sha256::3f8085c0211c4ca1ba9f8a03889b3d60738432c1673b57b0086070ef6e094cca"
 CHKUPDATE="anitya::id=3636"
