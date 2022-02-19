@@ -1,4 +1,5 @@
 VER=19.3
+REL=1
 CODE=Matrix
 RSRC_COMMIT=bfd769ab1bb8b8589e258c6c367899dd7d0b2067
 SRCS="tbl::rename=kodi::https://github.com/xbmc/xbmc/archive/refs/tags/${VER}-${CODE}.tar.gz \
