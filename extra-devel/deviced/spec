@@ -1,3 +1,4 @@
 VER=0+git20210929
+REL=1
 SRCS="git::commit=fdb99b547af635fafd7bae08935d3a14d5c95ee6::https://gitlab.gnome.org/chergert/deviced"
 CHKSUMS="SKIP"
