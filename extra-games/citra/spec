@@ -1,4 +1,5 @@
 VER=0+git20210801
+REL=1
 SRCS="git::commit=c40871f126a5942b16b8b240d256b59e25b5e7ae::https://github.com/citra-emu/citra"
 CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=227639"
