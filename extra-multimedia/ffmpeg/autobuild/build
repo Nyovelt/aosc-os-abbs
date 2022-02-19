@@ -24,7 +24,7 @@ if [[ "${CROSS:-$ARCH}" = "amd64" ]]; then
 fi
 
 if [[ "${CROSS:-$ARCH}" = "amd64" ]]; then
-    NVENC="--enable-nvenc"
+    NVENC="--enable-nvenc --enable-ffnvcodec"
 fi
 
 
@@ -34,8 +34,7 @@ if [[ "${CROSS:-$ARCH}" != "i486" && "${CROSS:-$ARCH}" != "powerpc" && "${CROSS:
                 --disable-debug \
                 --disable-static \
                 --disable-stripping \
-                --enable-avisynth \
-                --enable-avresample \
+                --disable-avisynth \
                 --enable-fontconfig \
                 --enable-gnutls \
                 --enable-gpl \
@@ -70,6 +69,7 @@ if [[ "${CROSS:-$ARCH}" != "i486" && "${CROSS:-$ARCH}" != "powerpc" && "${CROSS:
                 --enable-lto \
                 --enable-libaom \
                 --enable-libsmbclient \
+                --enable-vulkan \
                 $MIPSCONF $PPCCONF $MFX $NVENC
     make
     make tools/qt-faststart
@@ -82,7 +82,6 @@ elif [[ "${CROSS:-$ARCH}" = "i486" || "${CROSS:-$ARCH}" = "armel" || "${CROSS:-$
                 --disable-static \
                 --disable-stripping \
                 --enable-avisynth \
-                --enable-avresample \
                 --enable-fontconfig \
                 --enable-gnutls \
                 --enable-gpl \
