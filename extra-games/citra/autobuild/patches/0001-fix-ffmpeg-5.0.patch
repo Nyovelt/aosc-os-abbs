@@ -1,0 +1,29 @@
+From 04f201ab348f24772156f0e69aee319fc0242700 Mon Sep 17 00:00:00 2001
+From: liushuyu <liushuyu011@gmail.com>
+Date: Sun, 20 Feb 2022 04:07:10 -0700
+Subject: [PATCH] dumping/ffmpeg_backend: add support for ffmpeg 5.0
+
+---
+ src/core/dumping/ffmpeg_backend.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/core/dumping/ffmpeg_backend.cpp b/src/core/dumping/ffmpeg_backend.cpp
+index dc7928fe0..292207b4b 100644
+--- a/src/core/dumping/ffmpeg_backend.cpp
++++ b/src/core/dumping/ffmpeg_backend.cpp
+@@ -758,7 +758,12 @@ void GetOptionList(std::vector<OptionInfo>& out, const AVClass* av_class, bool s
+     }
+ 
+     const AVClass* child_class = nullptr;
++#if LIBAVCODEC_VERSION_MAJOR >= 59
++    void* iter = nullptr;
++    while ((child_class = av_opt_child_class_iterate(av_class, &iter))) {
++#else
+     while ((child_class = av_opt_child_class_next(av_class, child_class))) {
++#endif
+         GetOptionListSingle(out, child_class);
+     }
+ }
+-- 
+2.35.1
+
