@@ -1,0 +1,68 @@
+From e5f744a940210abb56c0c05aecbc6f8edadf0e6b Mon Sep 17 00:00:00 2001
+From: Zixing Liu <liushuyu011@gmail.com>
+Date: Sat, 19 Feb 2022 21:57:37 -0700
+Subject: [PATCH 2/2] cmake: adjust configure file definition position ...
+
+... so that the variables are actually defined
+---
+ CMakeLists.txt        | 11 ++++++-----
+ shared/config.h.cmake | 10 ++++++++--
+ 2 files changed, 14 insertions(+), 7 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9dd9719555..d18f527753 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -187,13 +187,8 @@ if( CMAKE_BUILD_TYPE_TOLOWER MATCHES debug )
+     add_definitions(-Wall -Wextra)
+ endif()
+ 
+-# this needs to be here because also code in shared/ needs config.h. This is also the
+-# reason why various checks are above why they belong under if( WITH_PLAYER )
+-configure_file( shared/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/shared/config.h )
+-
+ add_subdirectory( data )
+ add_subdirectory( images )
+-add_subdirectory( shared )
+ 
+ if( WITH_PLAYER )
+     find_package(X11)
+@@ -317,6 +312,12 @@ if( WITH_PLAYER )
+ 
+ endif()
+ 
++# this needs to be here because also code in shared/ needs config.h. This is also the
++# reason why various checks are above why they belong under if( WITH_PLAYER )
++configure_file( shared/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/shared/config.h )
++
++add_subdirectory( shared )
++
+ if( WITH_UTILITIES )
+     add_subdirectory( utilities )
+ endif()
+diff --git a/shared/config.h.cmake b/shared/config.h.cmake
+index 3478edd0d4..9dde330686 100644
+--- a/shared/config.h.cmake
++++ b/shared/config.h.cmake
+@@ -19,10 +19,16 @@
+ #cmakedefine QT_QTOPENGL_FOUND 1
+ 
+ /* If liblastfm is found */
+-#cmakedefine HAVE_LIBLASTFM 1
++#cmakedefine LIBLASTFM_FOUND 1
++#ifdef LIBLASTFM_FOUND
++#define HAVE_LIBLASTFM 1
++#endif
+ 
+ /* If libofa is found */
+-#cmakedefine HAVE_LIBOFA 1
++#cmakedefine LIBOFA_FOUND 1
++#ifdef LIBOFA_FOUND
++#define HAVE_LIBOFA 1
++#endif
+ 
+ /* Whether cmake build type is debug */
+ #cmakedefine DEBUG_BUILD_TYPE
+-- 
+2.35.1
+
