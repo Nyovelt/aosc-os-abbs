@@ -1,5 +1,4 @@
-VER=2.3.3
+VER=2.4.2
 SRCS="tbl::https://github.com/CDrummond/cantata/releases/download/v$VER/cantata-$VER.tar.bz2"
-CHKSUMS="sha256::0d7f90c8f448adcdb1e013a6eb95147d9169d5b2023357ff8e34c29ab803ed1d"
-REL=4
+CHKSUMS="sha256::3ed25d0c838720af7ed08b89a30f3e05d6952d40a5f520f29b3558b2eacdec82"
 CHKUPDATE="anitya::id=251"
