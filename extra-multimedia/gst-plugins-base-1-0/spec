@@ -1,5 +1,4 @@
-VER=1.18.0
-SRCS="tbl::https://download.gnome.org/sources/gst-plugins-base/${VER%.*}/gst-plugins-base-$VER.tar.xz"
-CHKSUMS="sha256::762abdd1a950809a1cea62fff7f86b5f7d6bd5f6841e3e585c700b823cdb7897"
-REL=1
+VER=1.20.0
+SRCS="tbl::https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-$VER.tar.xz"
+CHKSUMS="sha256::4cb66fccf730b1037e6533862c2128990912a6db4e5bbd14e0ef914450eb4c7c"
 CHKUPDATE="anitya::id=21850"
