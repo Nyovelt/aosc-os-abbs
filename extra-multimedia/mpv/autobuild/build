@@ -3,7 +3,7 @@ abinfo "Configuring..."
                 --confdir=/etc/mpv \
                 --enable-libmpv-shared \
                 --enable-cdda \
-                --disable-vapoursynth \
+                --enable-vapoursynth \
                 --enable-dvbin \
                 --enable-openal \
                 --enable-sdl2 \
@@ -27,9 +27,6 @@ install -vm644 "$SRCDIR"/DOCS/{encoding.rst,tech-overview.txt} \
 abinfo "Installing mpv bash completion..."
 export PATH="$PKGDIR/usr/bin:$PATH"
 
-cd "$SRCDIR"/mpv-bash-completion
-make ${MAKEFLAGS}
-
 mkdir -pv "$PKGDIR"/etc/bash_completion.d
-cp -av "$SRCDIR"/mpv-bash-completion/mpv "$PKGDIR"/etc/bash_completion.d/
+install -Dvm755 "$SRCDIR"/etc/mpv.bash-completion "$PKGDIR"/etc/bash_completion.d/mpv.bash
 cd "$SRCDIR"
