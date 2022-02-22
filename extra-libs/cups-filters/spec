@@ -1,5 +1,4 @@
-VER=1.28.9
-REL=1
+VER=1.28.12
 SRCS="tbl::https://www.openprinting.org/download/cups-filters/cups-filters-$VER.tar.xz"
-CHKSUMS="sha256::2f69372a4fa76dc91e54b4c98ab4c65368e3dfbde92456205c98a39573e860ae"
+CHKSUMS="sha256::46e2ea3d884ad222bb863ce6511e59cf390ef8e835295be44a80e500b2a33a3a"
 CHKUPDATE="anitya::id=5541"
