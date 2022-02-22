@@ -2,6 +2,7 @@
 
 abinfo "Correcting permissions for the browser plugin (if any) ..."
 chmod -v a+x "$PKGDIR"/usr/lib/obs-plugins/libcef.so
+chmod -v a+x "$PKGDIR"/usr/lib/obs-plugins/libvulkan.so.1
 
 abinfo "Adding plugin folder to linker search path ..."
 patchelf --debug --set-rpath /usr/lib/obs-plugins/ "$PKGDIR"/usr/lib/obs-plugins/obs-browser{-page,.so}
