@@ -1,7 +1,8 @@
 PKGNAME=libdmapsharing
 PKGSEC=libs
 PKGDEP="libsoup avahi gst-plugins-base-1-0 gdk-pixbuf"
+BUILDDEP="gtk-doc"
 PKGDES="A library that implements the DMAP family of protocols"
 
-AUTOTOOLS_AFTER="--with-mdns=avahi LIBS=-lm"
+AUTOTOOLS_AFTER="--with-mdns=avahi --disable-tests LIBS=-lm"
 ABSHADOW=no
