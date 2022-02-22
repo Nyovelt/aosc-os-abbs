@@ -1,0 +1,4 @@
+PKGNAME=libplacebo
+PKGSEC=graphics
+PKGDES="Video processing shaders collection"
+PKGDEP="vulkan shaderc lcms2"

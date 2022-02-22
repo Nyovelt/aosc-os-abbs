@@ -1,0 +1,4 @@
+VER=4.192.1
+SRCS="https://github.com/haasn/libplacebo/archive/refs/tags/v$VER.tar.gz"
+CHKUPDATE="anitya::id=20101"
+CHKSUMS="sha256::2dc42e96bb67260a854fa7fd71b77af0f05e71aab0b5a7a3990d95b15ad68ce4"
