@@ -1,0 +1,2 @@
+abinfo "Setting Python to version 3 ..."
+export PYTHON=/usr/bin/python3
