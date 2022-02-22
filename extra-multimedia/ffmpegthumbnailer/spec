@@ -1,5 +1,4 @@
-VER=2.2.2
-REL=1
-SRCS="tbl::https://github.com/dirkvdb/ffmpegthumbnailer/releases/download/$VER/ffmpegthumbnailer-$VER.tar.bz2"
-CHKSUMS="sha256::1cb24059c38223f657b300c84dd80491b7040d4b69471c4fea69be862bc99b5b"
+VER=2.2.2+git20220218
+SRCS="git::commit=3db9fe895b2fa656bb40ddb7a62e27604a688171::https://github.com/dirkvdb/ffmpegthumbnailer"
+CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=230661"
