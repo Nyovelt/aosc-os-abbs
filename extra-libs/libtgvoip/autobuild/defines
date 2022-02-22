@@ -1,0 +1,4 @@
+PKGNAME="libtgvoip"
+PKGSEC=lib
+PKGDEP="openssl opus alsa-lib pulseaudio"
+PKGDES="A VoIP library for Telegram clients"

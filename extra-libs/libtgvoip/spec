@@ -1,0 +1,3 @@
+VER=2.4.4+git20220117
+SRCS="git::commit=a090c6a8f7bfb365b301d85bb8c9664d71321c5c::https://github.com/telegramdesktop/libtgvoip"
+CHKSUMS="SKIP"
