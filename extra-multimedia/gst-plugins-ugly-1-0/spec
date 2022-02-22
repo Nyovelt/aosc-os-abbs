@@ -1,5 +1,4 @@
-VER=1.18.4
-REL=2
+VER=1.20.0
 SRCS="tbl::https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-$VER.tar.xz"
-CHKSUMS="sha256::218df0ce0d31e8ca9cdeb01a3b0c573172cc9c21bb3d41811c7820145623d13c"
+CHKSUMS="sha256::4e8dcb5d26552f0a4937f6bc6279bd9070f55ca6ae0eaa32d72d264c44001c2e"
 CHKUPDATE="anitya::id=15187"
