@@ -1,8 +1,7 @@
-VER=1.16.4
-REL=1
+VER=1.16.5
 SRCS="tbl::https://www.makemkv.com/download/makemkv-bin-$VER.tar.gz \
       tbl::https://www.makemkv.com/download/makemkv-oss-$VER.tar.gz"
 # package oss parts first
 SUBDIR="makemkv-oss-$VER"
-CHKSUMS="sha256::22fbd3f57e93f3c79a76c878202fb27e85f2d66de26b3be87b69198228a66aa2 \
-         sha256::e6b0d391159e60c48c115cdf6938eb02f5aeef3c3fecf94813c500f4031e4f6b"
+CHKSUMS="sha256::a06e1ef1e2442b8490b783030c5c16cac2d6404525632234c04d032961f724f8 \
+         sha256::e58e34b3ce95462bc38a242a120692c2b4e56c5a98e57cce372931ff486c3b8c"
