@@ -1,0 +1,1 @@
+echo 'libtgvoip_la_LIBTOOLFLAGS = --tag=CXX' >> Makefile.am || abdie
