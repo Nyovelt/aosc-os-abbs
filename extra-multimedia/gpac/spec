@@ -1,5 +1,4 @@
-VER=1.0.1
-REL=1
-SRCS="tbl::https://github.com/gpac/gpac/archive/v$VER.tar.gz"
-CHKSUMS="sha256::3b0ffba73c68ea8847027c23f45cd81d705110ec47cf3c36f60e669de867e0af"
+VER=1.0.1+git20220218
+SRCS="git::commit=da85444d6807c41bd346a0009e09448ff51f4106::https://github.com/gpac/gpac"
+CHKSUMS="SKIP"
 CHKUPDATE="anitya::id=230919"
