@@ -1,5 +1,5 @@
-VER=7.0.1
-SRCS="https://github.com/mltframework/mlt/archive/v$VER.tar.gz"
-CHKSUMS="sha256::b68c88d9ad91889838186188cce938feee8b63e3755a3b6fb45dc9c2ae0c5ecd"
+VER=7.4.0
+SRCS="tbl::https://github.com/mltframework/mlt/archive/v$VER.tar.gz"
+CHKSUMS="sha256::17c19843ffdbca66777aaadf39acb11829fd930eaded92f768cbcb8ae59a5f37"
 CHKUPDATE="anitya::id=11007"
-REL=3
+
