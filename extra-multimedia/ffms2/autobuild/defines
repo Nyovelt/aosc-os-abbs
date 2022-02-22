@@ -4,4 +4,4 @@ PKGDEP="ffmpeg"
 PKGDES="A FFmpeg based library for easy frame accurate access"
 
 PKGBREAK="aegisub<=3.2.2-1"
-RECONF=0
+ABSHADOW=0
