@@ -1,4 +1,4 @@
-VER=1.18.5
+VER=1.20.0
 SRCS="tbl::https://gstreamer.freedesktop.org/src/gst-plugins-bad/gst-plugins-bad-$VER.tar.xz"
-CHKSUMS="sha256::a164923b94f0d08578a6fcaeaac6e0c05da788a46903a1086870e9ca45ad678e"
+CHKSUMS="sha256::015b8d4d9a395ebf444d40876867a2034dd3304b3ad48bc3a0dd0c1ee71dc11d"
 CHKUPDATE="anitya::id=21849"
