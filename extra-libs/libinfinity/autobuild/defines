@@ -4,4 +4,5 @@ PKGDEP="gnutls gsasl glib libxml2 gtk-2 avahi"
 BUILDDEP="gtk-doc"
 PKGDES="An implementation of the Infininote protocol written in GObject-based C"
 
+RECONF=0
 ABSHADOW=0

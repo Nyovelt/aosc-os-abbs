@@ -1,5 +1,4 @@
-VER=0.7.1
-REL=2
-SRCS="tbl::https://github.com/gobby/libinfinity/archive/$VER.tar.gz"
-CHKSUMS="sha256::663356d5332f5a20c787b4e4687b48196006f2ff7b5784bf4822d9cc0f1dcfe7"
+VER=0.7.2
+SRCS="tbl::https://github.com/gobby/libinfinity/releases/download/$VER/libinfinity-$VER.tar.gz"
+CHKSUMS="sha256::6e7029375a81c5e3dbcdf23b69402d220b124ac83e349f07fd37fd0e8379239e"
 CHKUPDATE="anitya::id=1641"
