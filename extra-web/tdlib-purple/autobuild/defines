@@ -2,5 +2,5 @@ PKGNAME=tdlib-purple
 PKGSEC=web
 PKGDES="A libpurple plugin for Telegram based on tdlib"
 PKGDEP="libpurple libtgvoip libpng libwebp"
-
+BUILDDEP="gperf"
 CMAKE_AFTER=" -DTd_DIR=/usr/local/lib/cmake/Td -Dtgvoip_INCLUDE_DIRS=/usr/include/tgvoip "
