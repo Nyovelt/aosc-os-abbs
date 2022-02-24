@@ -1,5 +1,5 @@
-pushd "${SRCDIR}/../tdlib"
-mkdir build
+mkdir "${SRCDIR}/../tdlib/build"
+pushd "${SRCDIR}/../tdlib/build"
 cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja
 ninja install
 popd
