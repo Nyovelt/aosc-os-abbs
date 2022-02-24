@@ -1,3 +1,6 @@
 VER=0.8.1
-SRCS="git::commit=tags/v$VER::https://github.com/ars3niy/tdlib-purple"
-CHKSUMS="SKIP"
+TDLIB_COMMIT="7d41d9eaa58a6e0927806283252dc9e74eda5512"
+SRCS="git::rename=tdlib-purple;commit=tags/v$VER::https://github.com/ars3niy/tdlib-purple \
+      git::rename=tdlib;commit=${TDLIB_COMMIT}::https://github.com/tdlib/td"
+CHKSUMS="SKIP SKIP"
+SUBDIR="tdlib-purple"
