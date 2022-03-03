@@ -1,4 +1,4 @@
-VER=6.9.12+34
+VER=6.9.12+41
 SRCS="tbl::https://github.com/ImageMagick/ImageMagick6/archive/${VER/+/-}.tar.gz"
-CHKSUMS="sha256::990f93f39ae36f917c64f7e5929810150de416b275e8afc2580fdea68be28255"
+CHKSUMS="sha256::c371bc0b9b688fab23e745d16635b5949129067ab8600bbffbdcfe6fb2e3b436"
 CHKUPDATE="anitya::id=16253"
