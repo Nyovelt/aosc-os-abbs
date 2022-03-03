@@ -1,0 +1,2 @@
+abinfo "Work around symbol redefinitions"
+export CFLAGS="$CFLAGS -fcommon"
