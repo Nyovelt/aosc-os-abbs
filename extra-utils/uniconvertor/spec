@@ -1,5 +1,4 @@
-VER=2.0~pre379
-SRCS="tbl::https://dev.gentoo.org/~jlec/distfiles/uniconvertor-${VER/\~/_}.tar.xz"
-CHKSUMS="sha256::96ab27fd19743bcb12385ffd15a586033e8a4a3aa1958eecf1c5cdee67a73fa5"
-REL=1
+VER=2.0~rc5
+SRCS="tbl::https://downloads.sk1project.net/uc2/uniconvertor-${VER/\~/}.tar.gz"
+CHKSUMS="sha256::55660b0757ee90b04c532252f98b5d95f5c6060e8bd8e1448ae50951894a3d3d"
 CHKUPDATE="anitya::id=231670"
