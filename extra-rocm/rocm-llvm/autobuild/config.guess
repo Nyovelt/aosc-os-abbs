@@ -33,4 +33,7 @@ case $UNAME in
 	ppc64le)
 		echo "powerpc64le-aosc-linux-gnu"
 	;;
+	riscv64)
+		echo "riscv64-aosc-linux-gnu"
+	;;
 esac
