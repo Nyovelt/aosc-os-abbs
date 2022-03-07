@@ -5,3 +5,8 @@ PKGDEP="numactl"
 BUILDDEP="cmake"
 
 CMAKE_AFTER="-DCMAKE_INSTALL_PREFIX=/usr/lib/rocm"
+
+# Static library only package
+NOSTATIC=0
+NOLTO=1
+ABSPLITDBG=0
