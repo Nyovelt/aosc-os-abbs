@@ -1,0 +1,26 @@
+From 518d97d5bd9d182ad79b1fcb1df06625f29bb965 Mon Sep 17 00:00:00 2001
+From: Icenowy Zheng <icenowy@aosc.io>
+Date: Mon, 7 Mar 2022 16:41:55 +0800
+Subject: [PATCH] fix build with RelWithDebInfo configuration
+
+Signed-off-by: Icenowy Zheng <icenowy@aosc.io>
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9e28290..f3f879f 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -100,7 +100,7 @@ endif ()
+ # Use this instead of above for 32 bit
+ # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
+ 
+-if ("${CMAKE_BUILD_TYPE}" STREQUAL Release)
++if ("${CMAKE_BUILD_TYPE}" MATCHES Rel.*)
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+ else ()
+     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -O0 -DDEBUG")
+-- 
+2.35.1
+
