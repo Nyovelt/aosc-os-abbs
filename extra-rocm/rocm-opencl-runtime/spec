@@ -1,4 +1,4 @@
-VER=4.0.0
+VER=5.0.2
 SRCS="git::commit=tags/rocm-$VER;rename=ROCclr::https://github.com/ROCm-Developer-Tools/ROCclr \
       git::commit=tags/rocm-$VER;rename=ROCm-OpenCL-Runtime::https://github.com/RadeonOpenCompute/ROCm-OpenCL-Runtime"
 CHKSUMS="SKIP \
