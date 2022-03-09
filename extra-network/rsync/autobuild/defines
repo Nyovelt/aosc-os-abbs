@@ -1,7 +1,7 @@
 PKGNAME=rsync
 PKGSEC=net
-PKGDEP="perl popt acl zlib xxhash"
-PKGDEP__RETRO="popt acl zlib"
+PKGDEP="perl popt acl zlib xxhash lz4"
+PKGDEP__RETRO="popt acl zlib lz4"
 PKGDEP__ARMEL="${PKGDEP__RETRO}"
 PKGDEP__ARMHF="${PKGDEP__RETRO}"
 PKGDEP__I486="${PKGDEP__RETRO}"
