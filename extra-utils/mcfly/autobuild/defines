@@ -4,4 +4,6 @@ PKGDEP="glibc"
 BUILDDEP="rustc cargo llvm"
 PKGSEC="utils"
 
+USECLANG=1
 ABSPLITDBG=0
+NOCARGOAUDIT=1

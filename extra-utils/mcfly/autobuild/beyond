@@ -1,0 +1,12 @@
+abinfo "Installing completions ..."
+mkdir -pv "$PKGDIR"/usr/share/doc
+
+abinfo "Installing bash completions ..."
+install -Dvm644 "$SRCDIR"/mcfly.bash "$PKGDIR"/usr/share/doc/mcfly.bash
+
+abinfo "Installing zsh completions ..."
+install -Dvm644 "$SRCDIR"/mcfly.zsh "$PKGDIR"/usr/share/doc/mcfly.zsh
+
+abinfo "Installing fish completions ..."
+mkdir -pv "$PKGDIR"/usr/share/fish/vendor_completions.d
+install -Dvm644 "$SRCDIR"/mcfly.fish "$PKGDIR"/usr/share/fish/vendor_completions.d/mcfly.fish
