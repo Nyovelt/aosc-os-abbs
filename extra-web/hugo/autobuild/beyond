@@ -8,9 +8,9 @@ abinfo "Generating and installing hugo's shell auto completion ..."
 mkdir -pv "$PKGDIR"/usr/share/bash-completion/completions/ \
     "$PKGDIR"/usr/share/fish/completions/ \
     "$PKGDIR"/usr/share/zsh/site-functions/ 
-"$BUILDDIR"/hugo completion bash > /
+"$BUILDDIR"/hugo completion bash > \
     "$PKGDIR"/usr/share/bash-completion/completions/"$PKGNAME"
-"$BUILDDIR"/hugo completion fish > /
+"$BUILDDIR"/hugo completion fish > \
     "$PKGDIR"/usr/share/fish/completions/"$PKGNAME".fish
-"$BUILDDIR"/hugo completion zsh > /
+"$BUILDDIR"/hugo completion zsh > \
     "$PKGDIR"/usr/share/zsh/site-functions/_"$PKGNAME"
