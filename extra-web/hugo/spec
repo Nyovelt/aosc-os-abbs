@@ -1,4 +1,4 @@
-VER=0.91.2
+VER=0.98.0
 SRCS="https://github.com/gohugoio/hugo/archive/v$VER.tar.gz"
-CHKSUMS="sha256::a749485225d682dee43ea6a0644d5bd2e587c0535508be90e679b21e4553f8e9"
+CHKSUMS="sha256::5d993c81d98f88d89f38fbc7139d7d26474c32f344bc220abefad99a66ffff9f"
 CHKUPDATE="anitya::id=12959"
