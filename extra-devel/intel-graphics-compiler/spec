@@ -1,10 +1,10 @@
-VER=1.0.11104
+VER=1.0.11222
 SRCS="tbl::https://github.com/intel/intel-graphics-compiler/archive/igc-$VER.tar.gz \
       git::commit=c97396d044a8b3eacf0fbad5395a4b7bbce583a8;rename=vc-intrinsics::https://github.com/intel/vc-intrinsics \
       git::commit=e95eb30ace4954a3a7e8e17a3cc22f7382d4a47e;rename=SPIRV-LLVM-Translator::https://github.com/KhronosGroup/SPIRV-LLVM-Translator \
       git::commit=tags/sdk-1.3.211.0;rename=SPIRV-Tools::https://github.com/KhronosGroup/SPIRV-Tools \
       git::commit=tags/sdk-1.3.211.0;rename=SPIRV-Headers::https://github.com/KhronosGroup/SPIRV-Headers"
-CHKSUMS="sha256::b0b46ffe9f0543e6d1c4182aceb2921fec3b0a63dd1a09e4128b00bcea399aaf \
+CHKSUMS="sha256::d92f0608dcbb52690855685f9447282e5c09c0ba98ae35fabf114fcf8b1e9fcf \
          SKIP \
          SKIP \
          SKIP \
