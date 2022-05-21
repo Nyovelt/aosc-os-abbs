@@ -1,2 +1,2 @@
 abinfo "Byte compiling python stuff"
-(cd "${PKGDIR}"/usr/lib/mstflint/python_tools; python3 -m compileall -j 0 .)
+python3 -m compileall -j 0 ${PKGDIR}/usr/lib/mstflint/python_tools
