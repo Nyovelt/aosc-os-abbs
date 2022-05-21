@@ -14,3 +14,6 @@ rm -rvf "${PKGDIR}/etc/udev"
 
 abinfo "We don't need /etc/init.d stuff"
 rm -rvf "${PKGDIR}/etc/init.d"
+
+abinfo "Byte-compiling python bindings"
+python3 -m compileall "${PKGDIR}" 
