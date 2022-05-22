@@ -1,0 +1,4 @@
+VER=1.8.3
+SRCS="tbl::https://gitlab.com/tagoh/imsettings/-/archive/$VER/imsettings-$VER.tar.gz"
+CHKSUMS="sha256::0ce97af5a341c0f8b5b9e12538825491e6d702271652b08833694abb86a96bdb"
+CHKUPDATE="anitya::id=11703"

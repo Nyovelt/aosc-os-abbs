@@ -1,0 +1,7 @@
+PKGNAME=imsettings
+PKGSEC=x11
+PKGDES="A framework that delivers input method settings and applies the changes immediately"
+PKGDEP="glib glibc gobject-introspection libnotify x11-lib"
+
+AUTOTOOLS_AFTER="--with-xinputsh=90-xinput.sh \
+                 --disable-static"
