@@ -1,1 +1,4 @@
-sed -i 's@/usr/lib/libexec@/usr/lib@g' "$PKGDIR"/usr/bin/kwinwrapper
+abinfo "Fixing broken paths ..."
+for i in /usr/bin/kwinwrapper /usr/share/wayland-sessions/plasma-mobile.desktop; do
+	sed -i 's@/usr/lib/libexec@/usr/lib@g' "$PKGDIR$i"
+done

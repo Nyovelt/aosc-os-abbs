@@ -26,7 +26,7 @@ Before=graphical.target
 ConditionPathExists=/dev/tty0
 
 [Service]
-ExecStart=/usr/bin/plasma-phone
+ExecStart=/usr/bin/kwinwrapper
 TimeoutStartSec=30
 User=aosc
 PAMName=login
