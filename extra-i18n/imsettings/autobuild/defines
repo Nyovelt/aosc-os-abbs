@@ -1,7 +1,8 @@
 PKGNAME=imsettings
 PKGSEC=x11
 PKGDES="A framework that delivers input method settings and applies the changes immediately"
-PKGDEP="glib glibc gobject-introspection libnotify x11-lib"
+PKGDEP="glib glibc gobject-introspection gtk-3 libnotify x11-lib"
+BUILDDEP="gnome-common docbook2x"
 
 AUTOTOOLS_AFTER="--with-xinputsh=90-xinput.sh \
                  --disable-static"
