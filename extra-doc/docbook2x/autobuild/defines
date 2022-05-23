@@ -1,7 +1,9 @@
 PKGNAME=docbook2x
-PKGSEC=doc
-PKGDEP="docbook-utils"
-PKGDES="Transitional package for DocBook-Utils"
+PKGSEC=utils
+PKGDES="A DocBook documents to man and Texinfo format converter."
+PKGDEP="glibc opensp libxslt perl-xml-sax perl-xml-sax-expat texinfo"
 
-ABHOST=noarch
 PKGEPOCH=2
+
+# Arch and Fedora: to avoid clashing with docbook2* from docbook-utils
+AUTOTOOLS_AFTER="--program-transform-name='s/docbook2/db2x_docbook2/'"

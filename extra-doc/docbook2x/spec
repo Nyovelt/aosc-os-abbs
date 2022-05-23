@@ -1,4 +1,4 @@
-VER=0
-REL=2
-DUMMYSRC=1
-CHKSUMS="SKIP"
+VER=0.8.8
+SRCS="tbl::http://downloads.sourceforge.net/docbook2x/docbook2X-$VER.tar.gz"
+CHKSUMS="sha256::4077757d367a9d1b1427e8d5dfc3c49d993e90deabc6df23d05cfe9cd2fcdc45"
+CHKUPDATE="anitya::id=246845"
