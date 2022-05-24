@@ -1,3 +1,11 @@
+abinfo "Creating application symlinks ..."
 for i in nsgmls sgmlnorm spam spcat spent sx; do
     ln -sv o${i} "$PKGDIR"/usr/bin/${i}
 done
+
+abinfo "Renaming /usr/bin/sx to /usr/bin/sgml2xml ..."
+# Reference:
+# 1. https://bugs.archlinux.org/task/49792
+# 2. https://src.fedoraproject.org/rpms/opensp/blob/f36/f/opensp.spec#_78
+mv -v "$PKGDIR"/usr/bin/sx "$PKGDIR"/usr/bin/sgml2xml
+mv -v "$PKGDIR"/usr/share/man/man1/{sx,sgml2xml}.1
