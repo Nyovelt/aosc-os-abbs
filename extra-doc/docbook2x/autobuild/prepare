@@ -1,0 +1,3 @@
+abinfo "Replacing obsolete autotools macro ..."
+sed -e 's/AM_CONFIG_HEADER(/AC_CONFIG_HEADERS(/' \
+    -i "$SRCDIR"/configure.ac
