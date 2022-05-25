@@ -1,3 +1,8 @@
-PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
+abinfo "Generating Makefile from Makefile.PL ..."
+PERL_MM_USE_DEFAULT=1 perl -I"$SRCDIR" Makefile.PL INSTALLDIRS=vendor
+
+abinfo "Building Perl package ..."
 make
+
+abinfo "Installing Perl package ..."
 PERLLIB=blib/lib make install DESTDIR="$PKGDIR"
