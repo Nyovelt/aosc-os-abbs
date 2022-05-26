@@ -1,0 +1,17 @@
+for i in $(find "$SRCDIR" -name config.guess -o -name config.sub); do \
+    abinfo "Copying replacement $i ..."
+    cp -v "/usr/share/automake-1.16/$(basename "$i")" "$i"
+done
+
+abinfo "Creating directory for shadow build ..."
+mkdir -pv "$BLDDIR"
+cd "$BLDDIR"
+
+abinfo "Running configure ..."
+"$SRCDIR"/configure $AUTOTOOLS_DEF $AUTOTOOLS_AFTER
+
+abinfo "Building binaries ..."
+make V=1 VERBOSE=1
+
+abinfo "Installing binaries ..."
+make V=1 VERBOSE=1 DESTDIR="$PKGDIR" install
