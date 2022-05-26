@@ -8,4 +8,4 @@ PKGEPOCH=2
 RECONF=0
 
 # Arch and Fedora: to avoid clashing with docbook2* from docbook-utils
-AUTOTOOLS_AFTER="--program-transform-name='s/docbook2/db2x_docbook2/'"
+AUTOTOOLS_AFTER='--program-transform-name='s/docbook2/db2x_docbook2/''
