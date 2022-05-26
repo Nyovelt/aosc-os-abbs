@@ -1,3 +1,8 @@
 abinfo "Replacing obsolete autotools macro ..."
 sed -e 's/AM_CONFIG_HEADER(/AC_CONFIG_HEADERS(/' \
     -i "$SRCDIR"/configure.ac
+
+abinfo "Re-generating Autotools scripts using autoreconf ..."
+# FIXME: As for now only autoreconf can be used to re-generate docbook2x's
+# Autotools scripts because its autogen.sh is too old.
+autoreconf -fvis 2>&1
