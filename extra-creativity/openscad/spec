@@ -1,0 +1,4 @@
+VER=2021.01+git20220514
+SRCS="git::commit=6aae7963498675dfb5bedaaef2cb8e56bdcddcab::https://github.com/openscad/openscad"
+CHKSUMS="SKIP"
+CHKUPDATE="anitya::id=2560"
