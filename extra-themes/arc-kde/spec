@@ -1,4 +1,4 @@
-VER=20180614
+VER=20220603
 SRCS="tbl::https://github.com/PapirusDevelopmentTeam/arc-kde/archive/$VER.tar.gz"
-CHKSUMS="sha256::44267738b2bee20f62cc3f1c150b4eb0aa7ce79f4f5d302102f11d15ffa6de15"
+CHKSUMS="sha256::700a6ea838a09402491a1e547728f0029f5ee9d9d0d230aa12fcc2a49f056504"
 CHKUPDATE="anitya::id=14639"
