@@ -1,4 +1,4 @@
-VER=20200718
+VER=20220527
 SRCS="tbl::https://github.com/daniruiz/flat-remix-gtk/archive/$VER.tar.gz"
-CHKSUMS="sha256::95e00f28ab6889c7330fad3b067a64049192bc76e7d40d368011658586bf9eb7"
+CHKSUMS="sha256::c30a40ea4cbcc811d11cd5be84bd0982948f1e9aa8ceee0a89dd09aef2003eb6"
 CHKUPDATE="anitya::id=231527"
