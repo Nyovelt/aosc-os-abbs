@@ -1,5 +1,6 @@
 # Adapted from AUR.
 
+abinfo "Installing greybird theme resources ..."
 install -dvm755 "$PKGDIR/usr/share/themes/Greybird Classic"
 install -dvm755 "$PKGDIR/usr/share/themes/Greybird Compact"
 install -dvm755 "$PKGDIR/usr/share/themes/Greybird a11y"
