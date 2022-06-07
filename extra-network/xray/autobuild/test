@@ -1,0 +1,3 @@
+abtest() {
+    go test -p 1 -tags json -v -timeout 30m ./...
+}
