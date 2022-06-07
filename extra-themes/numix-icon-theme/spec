@@ -1,4 +1,4 @@
-VER=20190917
-SRCS="git::commit=cfef86f11d224fc01abad6449eb0bc9ff9928093::https://github.com/numixproject/numix-icon-theme"
-CHKSUMS="SKIP"
+VER=21.10.31
+SRCS="tbl::https://github.com/numixproject/numix-icon-theme/archive/v$VER.tar.gz"
+CHKSUMS="sha256::a5a703259b3242ec4fe77eb20b70fb4b4f0bf9c61d9550043c770dd563e62556"
 CHKUPDATE="anitya::id=10909"

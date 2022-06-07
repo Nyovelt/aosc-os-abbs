@@ -1,2 +1,3 @@
-mkdir -p "$PKGDIR"/usr/share/icons/
-cp -a {Numix,Numix-Light} "$PKGDIR"/usr/share/icons/
+abinfo "Installing numix-icon-theme resources ..."
+mkdir -pv "$PKGDIR"/usr/share/icons/
+cp -av {Numix,Numix-Light} "$PKGDIR"/usr/share/icons/

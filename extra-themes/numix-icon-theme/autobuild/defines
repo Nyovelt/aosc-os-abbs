@@ -3,4 +3,6 @@ PKGDES="A minimalistic icon theme from the Numix Project"
 PKGDEP="gnome-icon-theme hicolor-icon-theme"
 PKGSEC=x11
 
+PKGEPOCH=2
+
 ABHOST=noarch
