@@ -3,4 +3,6 @@ PKGDES="A minimalistic icon theme from the Numix Project (Circle variant)"
 PKGDEP="numix-icon-theme"
 PKGSEC=x11
 
+PKGEPOCH=2
+
 ABHOST=noarch

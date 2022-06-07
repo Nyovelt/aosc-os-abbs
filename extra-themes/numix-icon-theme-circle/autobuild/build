@@ -1,2 +1,3 @@
-mkdir -p "$PKGDIR"/usr/share/icons/
-cp -a {Numix-Circle,Numix-Circle-Light} "$PKGDIR"/usr/share/icons/
+abinfo "Install numix-icon-theme-circle resources ..."
+mkdir -pv "$PKGDIR"/usr/share/icons/
+cp -av {Numix-Circle,Numix-Circle-Light} "$PKGDIR"/usr/share/icons/

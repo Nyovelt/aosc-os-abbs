@@ -1,4 +1,4 @@
-VER=20160927
-SRCS="git::commit=481bc1100f01e25e92deb7facf61436b27f9ca8a::https://github.com/numixproject/numix-icon-theme-circle"
-CHKSUMS="SKIP"
+VER=22.05.22
+SRCS="tbl::https://github.com/numixproject/numix-icon-theme-circle/archive/$VER.tar.gz"
+CHKSUMS="sha256::31bfec592c2b36eed1748f1e6c19be25b711de78f4f34d5f0801dc9467a01c07"
 CHKUPDATE="anitya::id=10910"
