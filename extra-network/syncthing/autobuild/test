@@ -1,0 +1,5 @@
+abtest() {
+    pushd "$SRCDIR"/src/github.com/syncthing/syncthing
+        GOFLAGS="${GOFLAGS/-buildmode=pie}" go run build.go -no-upgrade -version v$PKGVER test
+    popd
+}
