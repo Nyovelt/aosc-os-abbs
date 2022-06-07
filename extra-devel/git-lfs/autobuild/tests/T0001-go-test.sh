@@ -1,0 +1,3 @@
+abtest(){
+    go test -v -mod=vendor ./...
+}
