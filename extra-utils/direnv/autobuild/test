@@ -1,0 +1,20 @@
+abtest() {
+    local TESTFAILURE=0
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-stdlib || \
+        abwarn "test-stdlib exited with non-zero status: $?" && TESTFAILURE=1
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-go || \
+        abwarn "test-go exited with non-zero status: $?" && TESTFAILURE=1
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-bash || \
+        abwarn "test-bash exited with non-zero status: $?" && TESTFAILURE=1
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-fish || \
+        abwarn "test-fish exited with non-zero status: $?" && TESTFAILURE=1
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-tcsh || \
+        abwarn "test-tcsh exited with non-zero status: $?" && TESTFAILURE=1
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-zsh  || \
+        abwarn "test-zsh exited with non-zero status: $?" && TESTFAILURE=1
+    # Test for elvish has known issues.
+    make PREFIX="/usr" DESTDIR="${PKGDIR}" test-elvish || \
+        abwarn "test-elvish exited with non-zero status: $?" && \
+        abinfo "However, as of direnv 2.31.0 and elvish 0.18.0, these tests are known to fail."
+    return $TESTFAILURE
+}
