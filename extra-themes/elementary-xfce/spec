@@ -1,4 +1,4 @@
-VER=20160915
-SRCS="git::commit=ab0c6740d614b96c97f0b7b018a672f631d00cdf::https://github.com/shimmerproject/elementary-xfce"
-CHKSUMS="SKIP"
+VER=0.16
+SRCS="tbl::https://github.com/shimmerproject/elementary-xfce/archive/v$VER.tar.gz"
+CHKSUMS="sha256::6dc0d6fb37965f85f25e2cf8254ee3159508e3680906e5a40a748a6d2c8737f7"
 CHKUPDATE="anitya::id=8338"
