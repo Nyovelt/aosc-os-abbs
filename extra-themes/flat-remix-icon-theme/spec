@@ -1,4 +1,4 @@
-VER=20191122
+VER=20220525
 SRCS="tbl::https://github.com/daniruiz/flat-remix/archive/$VER.tar.gz"
-CHKSUMS="sha256::57ac4fc0615b80d604465aca6f61723aca46aeb20a83c43df60e681f899b3948"
+CHKSUMS="sha256::ffee808b8bc9d9f2a3f6fb5fe22b2674d74b0e78e087f06f6852b4dd6e48b013"
 CHKUPDATE="anitya::id=231526"
