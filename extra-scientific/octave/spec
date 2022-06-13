@@ -1,4 +1,4 @@
-VER=6.4.0
+VER=7.1.0
 SRCS="tbl::https://ftp.gnu.org/gnu/octave/octave-$VER.tar.lz"
-CHKSUMS="sha256::40eaa1492ec1baf5084a1694288febdcba568838f4983450f8dac5819934059a"
+CHKSUMS="sha256::9e8d1f4d64fa1bcfa30a571e240dc83715dbaede1de96a982bdc89cac7ced42c"
 CHKUPDATE="anitya::id=2528"
