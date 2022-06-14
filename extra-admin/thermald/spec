@@ -1,4 +1,4 @@
-VER=2.4.6
+VER=2.4.9
 SRCS="https://github.com/intel/thermal_daemon/archive/v$VER.tar.gz"
-CHKSUMS="sha256::80c92902a89b72a9df85c51a8b5fc472cc01b4410600ef1f56d62c4ac23890c1"
+CHKSUMS="sha256::fb793a2bfaae2e544ef62801075419587b0c045041c69eeafbf61959cce07fdb"
 CHKUPDATE="anitya::id=14500"
