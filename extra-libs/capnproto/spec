@@ -1,4 +1,4 @@
-VER=0.9.1
+VER=0.10.1
 SRCS="tbl::https://github.com/capnproto/capnproto/archive/v$VER.tar.gz"
-CHKSUMS="sha256::daf49f794560f715e2f4651c842aaece2d065d4216834c5c3d3254962e35b535"
+CHKSUMS="sha256::2e9c918f02c198557c75ca7c635fe281337c9755b752a6ab3a841bcc1cf5176b"
 CHKUPDATE="anitya::id=11515"
