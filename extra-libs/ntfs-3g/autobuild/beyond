@@ -7,19 +7,12 @@ abinfo "Configuring, building, and installing the system compression plugin ..."
     make install DESTDIR="$PKGDIR"
 )
 
-for i in dedup onedrive; do
-    abinfo "Configuring, building, and installing the $i plugin ..."
-    (
-        cd "$SRCDIR"/../$i
-        autoreconf -fvi
-        ./configure --prefix=/usr
-        make
-        make install DESTDIR="$PKGDIR"
-    )
-done
-
 abinfo "Creating mount.ntfs symlink to ease mounting ..."
 ln -sv ntfs-3g "$PKGDIR"/usr/bin/mount.ntfs
+ln -sv ntfs-3g "$PKGDIR"/usr/bin/mount.ntfs-fuse
+
+abinfo "Creating symlink for fsck..."
+ln -sv ntfsck "$PKGDIR"/usr/bin/fsck.ntfs
 
 abinfo "Moving /bin => /usr/bin ..."
 cp -av "$PKGDIR"/bin/* "$PKGDIR"/usr/bin/
