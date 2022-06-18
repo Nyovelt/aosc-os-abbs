@@ -1,25 +1,30 @@
-From 419ad88730b9b40ebff30fa273a7dcdb2158e39b Mon Sep 17 00:00:00 2001
+From 6a318ce3467f84ef88188e9ac7e2eca251975441 Mon Sep 17 00:00:00 2001
 From: liushuyu <liushuyu011@gmail.com>
 Date: Wed, 27 Apr 2022 17:59:09 -0600
 Subject: [PATCH] Port to LLVM 14
+
+Patch compatible version: igc-1.0.11378
 
 Signed-off-by: Zixing Liu <liushuyu011@gmail.com>
 ---
  IGC/AdaptorCommon/AddImplicitArgs.cpp         |   2 +-
  .../LegalizeFunctionSignatures.cpp            |   9 +-
  IGC/AdaptorCommon/ProcessFuncAttributes.cpp   |   7 +-
+ .../RayTracing/AllocaTracking.cpp             |   2 +-
+ .../RayTracing/InlineDataPass.cpp             |   3 +-
+ .../RayTracing/LowerIntersectionAnyHit.cpp    |   3 +-
  IGC/AdaptorCommon/RayTracing/RTBuilder.cpp    |  13 +-
+ .../RayTracing/StackIDSchedulingPass.cpp      |   3 +-
  IGC/AdaptorOCL/SPIRV/SPIRVReader.cpp          |   7 +-
  IGC/AdaptorOCL/SPIRV/SPIRVUtil.cpp            |   4 +-
  IGC/AdaptorOCL/UnifyIROCL.cpp                 |   3 +-
  IGC/Compiler/CISACodeGen/CheckInstrTypes.cpp  |   2 +-
  IGC/Compiler/CISACodeGen/CodeSinking.cpp      |   3 +-
- IGC/Compiler/CISACodeGen/DebugInfo.cpp        |   3 +-
  IGC/Compiler/CISACodeGen/EmitVISAPass.cpp     |  24 +--
  IGC/Compiler/CISACodeGen/EmitVISAPass.hpp     |   2 +-
  IGC/Compiler/CISACodeGen/Emu64OpsPass.cpp     |   4 +-
  IGC/Compiler/CISACodeGen/GenCodeGenModule.cpp |   4 +-
- IGC/Compiler/CISACodeGen/HFfoldingOpt.cpp     |   3 +-
+ IGC/Compiler/CISACodeGen/HFpackingOpt.cpp     |   2 +-
  IGC/Compiler/CISACodeGen/HalfPromotion.cpp    |   4 +-
  .../CISACodeGen/OpenCLKernelCodeGen.cpp       |   2 +-
  IGC/Compiler/CISACodeGen/PatternMatchPass.hpp |   3 +-
@@ -29,7 +34,7 @@ Signed-off-by: Zixing Liu <liushuyu011@gmail.com>
  IGC/Compiler/CISACodeGen/VectorProcess.cpp    |   2 +-
  IGC/Compiler/CISACodeGen/WIAnalysis.cpp       |   2 +-
  IGC/Compiler/CISACodeGen/helper.cpp           |   2 +-
- IGC/Compiler/CustomSafeOptPass.cpp            |   3 +-
+ IGC/Compiler/CustomSafeOptPass.cpp            |   4 +-
  IGC/Compiler/GenTTI.cpp                       |   6 +-
  IGC/Compiler/GenTTI.h                         |   6 +-
  IGC/Compiler/LowPrecisionOptPass.cpp          |   4 +-
@@ -103,15 +108,16 @@ Signed-off-by: Zixing Liu <liushuyu011@gmail.com>
  .../lib/Utils/General/DebugInfo.cpp           |  12 +-
  .../utils/vcb/UniqueCompilation.cpp           |   4 +-
  IGC/VectorCompiler/utils/vcb/vcb.cpp          |   4 +-
- IGC/WrapperLLVM/CMakeLists.txt                |   8 +
+ IGC/WrapperLLVM/CMakeLists.txt                |   9 +
  .../include/lldWrapper/Common/Driver.h        |   4 +-
  .../include/llvmWrapper/ADT/APInt.h           |  84 ++++++++
+ .../llvmWrapper/Analysis/AliasAnalysis.h      |   6 +
  .../include/llvmWrapper/IR/Attributes.h       |  86 ++++++++
  .../include/llvmWrapper/IR/ConstantFolder.h   | 180 +++++++++++-----
  .../include/llvmWrapper/IR/Function.h         |  16 ++
  .../include/llvmWrapper/IR/IRBuilder.h        |   8 +
  .../include/llvmWrapper/IR/InstrTypes.h       |  18 ++
- .../include/llvmWrapper/IR/Instructions.h     |  18 ++
+ .../include/llvmWrapper/IR/Instructions.h     |  26 +++
  .../include/llvmWrapper/MC/MCContext.h        |   2 +-
  .../include/llvmWrapper/MC/MCStreamer.h       |  25 +++
  .../include/llvmWrapper/Support/Alignment.h   |   6 +
@@ -120,7 +126,7 @@ Signed-off-by: Zixing Liu <liushuyu011@gmail.com>
  .../include/llvmWrapper/Transforms/Scalar.h   |   2 +-
  IGC/common/IGCIRBuilder.h                     |   2 +-
  IGC/common/debug/Debug.cpp                    |  12 ++
- 115 files changed, 882 insertions(+), 415 deletions(-)
+ 119 files changed, 902 insertions(+), 418 deletions(-)
  create mode 100644 IGC/WrapperLLVM/include/llvmWrapper/ADT/APInt.h
  create mode 100644 IGC/WrapperLLVM/include/llvmWrapper/IR/Attributes.h
  create mode 100644 IGC/WrapperLLVM/include/llvmWrapper/MC/MCStreamer.h
@@ -141,7 +147,7 @@ index 3c4668a74..3e4959ae4 100644
          // let's prepare argument list on new call function
          llvm::Function::arg_iterator new_arg_iter = new_func->arg_begin();
 diff --git a/IGC/AdaptorCommon/LegalizeFunctionSignatures.cpp b/IGC/AdaptorCommon/LegalizeFunctionSignatures.cpp
-index fc83d8005..9554b4522 100644
+index 2cebb9814..b8f6f82a1 100644
 --- a/IGC/AdaptorCommon/LegalizeFunctionSignatures.cpp
 +++ b/IGC/AdaptorCommon/LegalizeFunctionSignatures.cpp
 @@ -12,6 +12,7 @@ SPDX-License-Identifier: MIT
@@ -152,7 +158,7 @@ index fc83d8005..9554b4522 100644
  #include "llvmWrapper/IR/DerivedTypes.h"
  #include <llvmWrapper/IR/Instructions.h>
  #include <llvm/IR/Module.h>
-@@ -541,7 +542,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
+@@ -545,7 +546,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
      // Check return type
      Value* returnPtr = nullptr;
      if (callInst->getType()->isVoidTy() &&
@@ -161,7 +167,7 @@ index fc83d8005..9554b4522 100644
          callInst->paramHasAttr(0, llvm::Attribute::StructRet) &&
          isPromotableStructType(M, callInst->getArgOperand(0)->getType(), isStackCall, true /* retval */))
      {
-@@ -563,7 +564,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
+@@ -567,7 +568,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
      }
  
      // Check call operands if it needs to be replaced
@@ -170,7 +176,7 @@ index fc83d8005..9554b4522 100644
      {
          Value* arg = callInst->getArgOperand(opNum);
          if (!isLegalIntVectorType(M, arg->getType()))
-@@ -601,7 +602,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
+@@ -605,7 +606,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
          {
              // legal argument
              callArgs.push_back(arg);
@@ -179,7 +185,7 @@ index fc83d8005..9554b4522 100644
          }
      }
  
-@@ -634,7 +635,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
+@@ -638,7 +639,7 @@ void LegalizeFunctionSignatures::FixCallInstruction(Module& M, CallInst* callIns
          // Create the new call instruction
          CallInst* newCallInst = builder.CreateCall(newCalledValue, callArgs);
          newCallInst->setCallingConv(callInst->getCallingConv());
@@ -189,7 +195,7 @@ index fc83d8005..9554b4522 100644
  
          if (legalizeReturnType)
 diff --git a/IGC/AdaptorCommon/ProcessFuncAttributes.cpp b/IGC/AdaptorCommon/ProcessFuncAttributes.cpp
-index a6d22e613..5bedb00b1 100644
+index 76a278af2..b52a7105d 100644
 --- a/IGC/AdaptorCommon/ProcessFuncAttributes.cpp
 +++ b/IGC/AdaptorCommon/ProcessFuncAttributes.cpp
 @@ -18,6 +18,7 @@ SPDX-License-Identifier: MIT
@@ -216,8 +222,63 @@ index a6d22e613..5bedb00b1 100644
                  }
              }
          }
+diff --git a/IGC/AdaptorCommon/RayTracing/AllocaTracking.cpp b/IGC/AdaptorCommon/RayTracing/AllocaTracking.cpp
+index b5ad27e32..fddbdc8f3 100644
+--- a/IGC/AdaptorCommon/RayTracing/AllocaTracking.cpp
++++ b/IGC/AdaptorCommon/RayTracing/AllocaTracking.cpp
+@@ -129,7 +129,7 @@ void rewriteTypes(
+             "Only handles void right now!");
+ 
+         SmallVector<Type*, 4> Tys;
+-        for (auto &Op : II->arg_operands())
++        for (auto &Op : IGCLLVM::args(II))
+             Tys.push_back(Op->getType());
+ 
+         auto* NewFTy = FunctionType::get(
+diff --git a/IGC/AdaptorCommon/RayTracing/InlineDataPass.cpp b/IGC/AdaptorCommon/RayTracing/InlineDataPass.cpp
+index 5e4df4e1a..c6685e7a0 100644
+--- a/IGC/AdaptorCommon/RayTracing/InlineDataPass.cpp
++++ b/IGC/AdaptorCommon/RayTracing/InlineDataPass.cpp
+@@ -42,6 +42,7 @@ SPDX-License-Identifier: MIT
+ #include "RTStackFormat.h"
+ #include "Compiler/IGCPassSupport.h"
+ #include "Compiler/CodeGenPublicEnums.h"
++#include "llvmWrapper/IR/Instructions.h"
+ 
+ #include <vector>
+ #include "common/LLVMWarningsPush.hpp"
+@@ -155,7 +156,7 @@ bool BindlessInlineDataPass::runOnModule(Module &M)
+                 // the size of the Shader Identifier + the size of the Local arguments
+                 const uint64_t dereferenceable_size =
+                     sizeof(ShaderIdentifier) +
+-                    local_buffer_ptr->getDereferenceableBytes(AttributeList::ReturnIndex);
++                    IGCLLVM::getRetDereferenceableBytes(local_buffer_ptr);
+ 
+                 // Return a CallInst* representing the InlinedData intrinsic call
+                 // In the shader dumps,
+diff --git a/IGC/AdaptorCommon/RayTracing/LowerIntersectionAnyHit.cpp b/IGC/AdaptorCommon/RayTracing/LowerIntersectionAnyHit.cpp
+index e9084af06..e3da9f305 100644
+--- a/IGC/AdaptorCommon/RayTracing/LowerIntersectionAnyHit.cpp
++++ b/IGC/AdaptorCommon/RayTracing/LowerIntersectionAnyHit.cpp
+@@ -25,6 +25,7 @@ SPDX-License-Identifier: MIT
+ #include <llvm/IR/InstIterator.h>
+ #include "llvmWrapper/Transforms/Utils/Cloning.h"
+ #include "llvmWrapper/Transforms/Utils/ValueMapper.h"
++#include "llvmWrapper/Support/Alignment.h"
+ #include "common/LLVMWarningsPop.hpp"
+ #include "Probe/Assertion.h"
+ #include "Utils.h"
+@@ -447,7 +448,7 @@ CallInst* LowerIntersectionAnyHit::codeGenReportHit(
+                 CustomHitAttrPtr,
+                 4,
+                 Attrs,
+-                std::min(4U, DL.getABITypeAlignment(AttrTy->getPointerElementType())),
++                std::min(static_cast<alignment_t>(4), DL.getABITypeAlignment(AttrTy->getPointerElementType())),
+                 IRB.getInt64(DL.getTypeAllocSize(AttrTy->getPointerElementType())));
+         }
+ 
 diff --git a/IGC/AdaptorCommon/RayTracing/RTBuilder.cpp b/IGC/AdaptorCommon/RayTracing/RTBuilder.cpp
-index ab7977bea..59e8507b9 100644
+index 4e74bf387..42fda5a6a 100644
 --- a/IGC/AdaptorCommon/RayTracing/RTBuilder.cpp
 +++ b/IGC/AdaptorCommon/RayTracing/RTBuilder.cpp
 @@ -23,6 +23,7 @@ SPDX-License-Identifier: MIT
@@ -265,8 +326,29 @@ index ab7977bea..59e8507b9 100644
      CI->setAttributes(AL);
  }
  
+diff --git a/IGC/AdaptorCommon/RayTracing/StackIDSchedulingPass.cpp b/IGC/AdaptorCommon/RayTracing/StackIDSchedulingPass.cpp
+index db5490267..5e8cfc6d2 100644
+--- a/IGC/AdaptorCommon/RayTracing/StackIDSchedulingPass.cpp
++++ b/IGC/AdaptorCommon/RayTracing/StackIDSchedulingPass.cpp
+@@ -50,6 +50,7 @@ SPDX-License-Identifier: MIT
+ #include <llvm/Analysis/PostDominators.h>
+ #include <llvm/Analysis/LoopInfo.h>
+ #include "llvmWrapper/Analysis/MemoryLocation.h"
++#include "llvmWrapper/Analysis/AliasAnalysis.h"
+ #include "common/LLVMWarningsPop.hpp"
+ 
+ using namespace llvm;
+@@ -175,7 +176,7 @@ BasicBlock* StackIDSchedulingPass::schedule(
+ ModRefInfo StackIDSchedulingPass::getModRefInfo(
+     const CallBase* Call, const MemoryLocation& Loc)
+ {
+-    AAQueryInfo AAQIP;
++    IGCLLVM::AAQueryInfo AAQIP;
+     return AA->getModRefInfo(Call, Loc, AAQIP);
+ }
+ 
 diff --git a/IGC/AdaptorOCL/SPIRV/SPIRVReader.cpp b/IGC/AdaptorOCL/SPIRV/SPIRVReader.cpp
-index ad6c62888..20e2e7baf 100644
+index 28f03341b..6fa1433c9 100644
 --- a/IGC/AdaptorOCL/SPIRV/SPIRVReader.cpp
 +++ b/IGC/AdaptorOCL/SPIRV/SPIRVReader.cpp
 @@ -47,8 +47,10 @@ THE SOFTWARE.
@@ -280,7 +362,7 @@ index ad6c62888..20e2e7baf 100644
  #include "llvmWrapper/IR/Module.h"
  #include "llvmWrapper/Support/Alignment.h"
  #include "llvmWrapper/Support/TypeSize.h"
-@@ -4211,8 +4213,7 @@ SPIRVToLLVM::transFunction(SPIRVFunction *BF) {
+@@ -4212,8 +4214,7 @@ SPIRVToLLVM::transFunction(SPIRVFunction *BF) {
    BF->foreachReturnValueAttr([&](SPIRVFuncParamAttrKind Kind){
      if (Kind == FunctionParameterAttributeCount)
        return;
@@ -290,7 +372,7 @@ index ad6c62888..20e2e7baf 100644
    });
  
    // Creating all basic blocks before creating instructions.
-@@ -5052,7 +5053,7 @@ SPIRVToLLVM::transOCLBuiltinFromExtInst(SPIRVExtInst *BC, BasicBlock *BB) {
+@@ -5053,7 +5054,7 @@ SPIRVToLLVM::transOCLBuiltinFromExtInst(SPIRVExtInst *BC, BasicBlock *BB) {
        BC->getName(),
        BB);
    setCallingConv(Call);
@@ -323,7 +405,7 @@ index d6e68bb8b..a598b134b 100644
    }
    return Args;
 diff --git a/IGC/AdaptorOCL/UnifyIROCL.cpp b/IGC/AdaptorOCL/UnifyIROCL.cpp
-index 805886412..acb4f746d 100644
+index e57daec9f..709f2aea0 100644
 --- a/IGC/AdaptorOCL/UnifyIROCL.cpp
 +++ b/IGC/AdaptorOCL/UnifyIROCL.cpp
 @@ -21,9 +21,8 @@ SPDX-License-Identifier: MIT
@@ -371,32 +453,11 @@ index 9ce359b3a..0c0343e44 100644
                  call0->isConvergent())
              {
                  return false;
-diff --git a/IGC/Compiler/CISACodeGen/DebugInfo.cpp b/IGC/Compiler/CISACodeGen/DebugInfo.cpp
-index 425d9dbdd..b5ba1d6a7 100644
---- a/IGC/Compiler/CISACodeGen/DebugInfo.cpp
-+++ b/IGC/Compiler/CISACodeGen/DebugInfo.cpp
-@@ -14,6 +14,7 @@ SPDX-License-Identifier: MIT
- #include "DebugInfo/DwarfDebug.hpp"
- #include "DebugInfo/VISADebugInfo.hpp"
- #include "Compiler/CISACodeGen/DebugInfo.hpp"
-+#include "llvmWrapper/IR/Instructions.h"
- #include "llvm/IR/IntrinsicInst.h"
- 
- using namespace llvm;
-@@ -346,7 +347,7 @@ void DebugInfoData::extractAddressClass(llvm::Function& F, CShader* pShader, IDe
-                             DIExpression* newDIExpr = di.createExpression(Exprs);
-                             Value* newMD = MetadataAsValue::get(F.getContext(), newDIExpr);
- 
--                            CI->setArgOperand(CI->getNumArgOperands() - 1, newMD);
-+                            CI->setArgOperand(IGCLLVM::getNumArgOperands(CI) - 1, newMD);
-                         }
-                     }
-                 }
 diff --git a/IGC/Compiler/CISACodeGen/EmitVISAPass.cpp b/IGC/Compiler/CISACodeGen/EmitVISAPass.cpp
-index 9d9d4a4a3..bbf432a83 100644
+index 991d453a5..1c8301caf 100644
 --- a/IGC/Compiler/CISACodeGen/EmitVISAPass.cpp
 +++ b/IGC/Compiler/CISACodeGen/EmitVISAPass.cpp
-@@ -3465,13 +3465,13 @@ void EmitPass::emitSetMessagePhaseType(GenIntrinsicInst* inst, VISA_Type type) {
+@@ -3485,13 +3485,13 @@ void EmitPass::emitSetMessagePhaseType(GenIntrinsicInst* inst, VISA_Type type) {
  
  void EmitPass::emitSetMessagePhaseX_legacy(GenIntrinsicInst* inst)
  {
@@ -412,7 +473,7 @@ index 9d9d4a4a3..bbf432a83 100644
      unsigned size = pTy->getScalarSizeInBits() / 8;
      emitSetMessagePhaseType(inst, GetTypeFromSize(size));
  }
-@@ -4301,7 +4301,7 @@ void EmitPass::emitEvalAttribute(llvm::GenIntrinsicInst* inst)
+@@ -4330,7 +4330,7 @@ void EmitPass::emitEvalAttribute(llvm::GenIntrinsicInst* inst)
  {
      CPixelShader* psProgram = static_cast<CPixelShader*>(m_currShader);
      // temp variable should be the same type as the destination
@@ -421,7 +482,7 @@ index 9d9d4a4a3..bbf432a83 100644
      EU_PIXEL_INTERPOLATOR_INTERPOLATION_MODE interpolationMode =
          perspective ? EU_PI_MESSAGE_PERSPECTIVE_INTERPOLATION : EU_PI_MESSAGE_LINEAR_INTERPOLATION;
      if (interpolationMode == EU_PI_MESSAGE_LINEAR_INTERPOLATION)
-@@ -10158,7 +10158,7 @@ bool EmitPass::validateInlineAsmConstraints(llvm::CallInst* inst, SmallVector<St
+@@ -10256,7 +10256,7 @@ bool EmitPass::validateInlineAsmConstraints(llvm::CallInst* inst, SmallVector<St
      if (success)
      {
          // Check the input constraint tokens
@@ -430,7 +491,7 @@ index 9d9d4a4a3..bbf432a83 100644
          {
              CVariable* cv = GetSymbol(inst->getArgOperand(i));
              success &= CheckConstraintTypes(constraints[index], cv);
-@@ -10208,7 +10208,7 @@ void EmitPass::EmitInlineAsm(llvm::CallInst* inst)
+@@ -10306,7 +10306,7 @@ void EmitPass::EmitInlineAsm(llvm::CallInst* inst)
      {
          opnds.push_back(m_destination);
      }
@@ -439,7 +500,7 @@ index 9d9d4a4a3..bbf432a83 100644
      {
          CVariable* cv = GetSymbol(inst->getArgOperand(i));
          opnds.push_back(cv);
-@@ -11928,7 +11928,7 @@ void EmitPass::emitStackCall(llvm::CallInst* inst)
+@@ -12043,7 +12043,7 @@ void EmitPass::emitStackCall(llvm::CallInst* inst)
      std::vector<CVariable*> argsOnStack;
      SmallVector<std::tuple<CVariable*, Type*, uint32_t>, 8> argsOnRegister;
  
@@ -448,7 +509,7 @@ index 9d9d4a4a3..bbf432a83 100644
      {
          Value* operand = inst->getArgOperand(i);
          CVariable* Src = GetSymbol(operand);
-@@ -15016,7 +15016,7 @@ void EmitPass::emitAtomicRaw(llvm::GenIntrinsicInst* pInsn)
+@@ -15133,7 +15133,7 @@ void EmitPass::emitAtomicRaw(llvm::GenIntrinsicInst* pInsn)
      ForceDMask();
      // Currently, Dword Atomics can be called by matching 2 intrinsics. One is the DwordAtomicRaw
      // and AtomicCmpXchg (which has 2 srcs unlike the other atomics).
@@ -457,7 +518,7 @@ index 9d9d4a4a3..bbf432a83 100644
  
      /// Immediate Atomics return the value before the atomic operation is performed. So that flag
      /// needs to be set for this.
-@@ -15261,7 +15261,7 @@ void EmitPass::emitAtomicTyped(GenIntrinsicInst* pInsn)
+@@ -15378,7 +15378,7 @@ void EmitPass::emitAtomicTyped(GenIntrinsicInst* pInsn)
      ForceDMask();
      // Currently, Dword Atomics can be called by matching 2 intrinsics. One is the DwordAtomicRaw
      // and AtomicCmpXchg (which has 2 srcs unlike the other atomics).
@@ -466,7 +527,7 @@ index 9d9d4a4a3..bbf432a83 100644
  
      /// Immediate Atomics return the value before the atomic operation is performed. So that flag
      /// needs to be set for this.
-@@ -15912,7 +15912,7 @@ LSC_FENCE_OP EmitPass::getLSCMemoryFenceOp(bool IsGlobalMemFence, bool Invalidat
+@@ -16029,7 +16029,7 @@ LSC_FENCE_OP EmitPass::getLSCMemoryFenceOp(bool IsGlobalMemFence, bool Invalidat
  void EmitPass::emitMemoryFence(llvm::Instruction* inst)
  {
      static constexpr int ExpectedNumberOfArguments = 7;
@@ -475,7 +536,7 @@ index 9d9d4a4a3..bbf432a83 100644
      CodeGenContext* ctx = getAnalysis<CodeGenContextWrapper>().getCodeGenContext();
  
      // If passed a non-constant value for any of the parameters,
-@@ -16954,7 +16954,7 @@ void EmitPass::emitfitof(llvm::GenIntrinsicInst* inst)
+@@ -17071,7 +17071,7 @@ void EmitPass::emitfitof(llvm::GenIntrinsicInst* inst)
  // Emit FP Operations (FPO) using round-to-zero (rtz)
  void EmitPass::emitFPOrtz(llvm::GenIntrinsicInst* inst)
  {
@@ -484,7 +545,7 @@ index 9d9d4a4a3..bbf432a83 100644
  
      GenISAIntrinsic::ID GID = inst->getIntrinsicID();
      CVariable* src0 = GetSymbol(inst->getOperand(0));
-@@ -16990,7 +16990,7 @@ void EmitPass::emitFPOrtz(llvm::GenIntrinsicInst* inst)
+@@ -17107,7 +17107,7 @@ void EmitPass::emitFPOrtz(llvm::GenIntrinsicInst* inst)
  
  // Emit FP mad (FMA) using round-to-positive-infinity (rtp)
  void EmitPass::emitFMArtp(llvm::GenIntrinsicInst *inst) {
@@ -493,7 +554,7 @@ index 9d9d4a4a3..bbf432a83 100644
  
    CVariable *src0 = GetSymbol(inst->getOperand(0));
    CVariable *src1 = GetSymbol(inst->getOperand(1));
-@@ -17007,7 +17007,7 @@ void EmitPass::emitFMArtp(llvm::GenIntrinsicInst *inst) {
+@@ -17124,7 +17124,7 @@ void EmitPass::emitFMArtp(llvm::GenIntrinsicInst *inst) {
  
  // Emit FP mad (FMA) using round-to-negative-infinity (rtn)
  void EmitPass::emitFMArtn(llvm::GenIntrinsicInst *inst) {
@@ -503,10 +564,10 @@ index 9d9d4a4a3..bbf432a83 100644
    CVariable *src0 = GetSymbol(inst->getOperand(0));
    CVariable *src1 = GetSymbol(inst->getOperand(1));
 diff --git a/IGC/Compiler/CISACodeGen/EmitVISAPass.hpp b/IGC/Compiler/CISACodeGen/EmitVISAPass.hpp
-index 0ae743dfb..9a122d90b 100644
+index e8fdec2ca..c31e52857 100644
 --- a/IGC/Compiler/CISACodeGen/EmitVISAPass.hpp
 +++ b/IGC/Compiler/CISACodeGen/EmitVISAPass.hpp
-@@ -631,7 +631,7 @@ public:
+@@ -633,7 +633,7 @@ public:
      {
          if (llvm::CallInst * pCall = llvm::dyn_cast<llvm::CallInst>(pInst))
          {
@@ -538,7 +599,7 @@ index 4402d0bae..a735fccd5 100644
          Value* OldVal = Call.getArgOperand(argNo);
          if (Emu->isInt64(OldVal))
 diff --git a/IGC/Compiler/CISACodeGen/GenCodeGenModule.cpp b/IGC/Compiler/CISACodeGen/GenCodeGenModule.cpp
-index 6c6eadbf2..784874433 100644
+index fe3426411..be509f895 100644
 --- a/IGC/Compiler/CISACodeGen/GenCodeGenModule.cpp
 +++ b/IGC/Compiler/CISACodeGen/GenCodeGenModule.cpp
 @@ -18,7 +18,7 @@ SPDX-License-Identifier: MIT
@@ -559,19 +620,11 @@ index 6c6eadbf2..784874433 100644
                  Modifided = true;
              }
          }
-diff --git a/IGC/Compiler/CISACodeGen/HFfoldingOpt.cpp b/IGC/Compiler/CISACodeGen/HFfoldingOpt.cpp
-index f2c1a95d3..fbfb0a3ac 100644
---- a/IGC/Compiler/CISACodeGen/HFfoldingOpt.cpp
-+++ b/IGC/Compiler/CISACodeGen/HFfoldingOpt.cpp
-@@ -17,6 +17,7 @@ SPDX-License-Identifier: MIT
- #include "Compiler/MetaDataUtilsWrapper.h"
- #include "Compiler/CISACodeGen/HFfoldingOpt.hpp"
- #include "Probe/Assertion.h"
-+#include "llvmWrapper/IR/Instructions.h"
- 
- using namespace llvm;
- using namespace IGC;
-@@ -594,7 +595,7 @@ bool HFfoldingOpt::findStoreSequence(std::vector<Instruction*>& path, std::vecto
+diff --git a/IGC/Compiler/CISACodeGen/HFpackingOpt.cpp b/IGC/Compiler/CISACodeGen/HFpackingOpt.cpp
+index 52e84fa1d..7ba5c7abf 100644
+--- a/IGC/Compiler/CISACodeGen/HFpackingOpt.cpp
++++ b/IGC/Compiler/CISACodeGen/HFpackingOpt.cpp
+@@ -809,7 +809,7 @@ bool HFpackingOpt::findStoreSequence(std::vector<Instruction*>& path, std::vecto
          uint srciCount = inst->getNumOperands();
          if (CallInst* cinst = dyn_cast<CallInst>(inst))
          {
@@ -603,10 +656,10 @@ index 1ea2338b5..2dd10938c 100644
              if (I.getOperand(i)->getType()->isHalfTy())
              {
 diff --git a/IGC/Compiler/CISACodeGen/OpenCLKernelCodeGen.cpp b/IGC/Compiler/CISACodeGen/OpenCLKernelCodeGen.cpp
-index 362ee0e6b..c68b0d3bf 100644
+index b6ee595f6..e42dbd8d3 100644
 --- a/IGC/Compiler/CISACodeGen/OpenCLKernelCodeGen.cpp
 +++ b/IGC/Compiler/CISACodeGen/OpenCLKernelCodeGen.cpp
-@@ -1685,7 +1685,7 @@ namespace IGC
+@@ -1688,7 +1688,7 @@ namespace IGC
                  }
                  else
                  {
@@ -724,10 +777,18 @@ index 16f9a036c..8cd8b1d22 100644
  
          for (int i = 0; i < num_ops; ++i)
 diff --git a/IGC/Compiler/CustomSafeOptPass.cpp b/IGC/Compiler/CustomSafeOptPass.cpp
-index d0ce99329..01c50be5c 100644
+index c40bf6135..4ca9056c4 100644
 --- a/IGC/Compiler/CustomSafeOptPass.cpp
 +++ b/IGC/Compiler/CustomSafeOptPass.cpp
-@@ -1784,7 +1784,7 @@ void IGC::CustomSafeOptPass::visitSampleBptr(llvm::SampleIntrinsic* sampleInst)
+@@ -75,6 +75,7 @@ cmp+sel to avoid expensive VxH mov.
+ #include <llvm/ADT/SetVector.h>
+ #include <llvm/Analysis/ConstantFolding.h>
+ #include <llvm/IR/Constants.h>
++#include <llvm/IR/DebugInfo.h>
+ #include <llvm/IR/Function.h>
+ #include <llvm/IR/Instructions.h>
+ #include <llvm/IR/Intrinsics.h>
+@@ -1977,7 +1978,7 @@ void IGC::CustomSafeOptPass::visitSampleBptr(llvm::SampleIntrinsic* sampleInst)
      {
          // Copy args skipping bias operand:
          llvm::SmallVector<llvm::Value*, 10> args;
@@ -736,7 +797,7 @@ index d0ce99329..01c50be5c 100644
          {
              args.push_back(sampleInst->getArgOperand(i));
          }
-@@ -6624,4 +6624,3 @@ bool InsertBranchOpt::runOnFunction(Function& F)
+@@ -6817,4 +6818,3 @@ bool InsertBranchOpt::runOnFunction(Function& F)
  
      return false;
  }
@@ -1643,10 +1704,10 @@ index df3169d8d..d0c8bc079 100644
      IGC_ASSERT(callReturningOpaque);
  
 diff --git a/IGC/Compiler/Optimizer/OpenCLPasses/OpenCLPrintf/OpenCLPrintfResolution.cpp b/IGC/Compiler/Optimizer/OpenCLPasses/OpenCLPrintf/OpenCLPrintfResolution.cpp
-index 6042096ba..795b20656 100644
+index 1f5860652..c4b1aad5b 100644
 --- a/IGC/Compiler/Optimizer/OpenCLPasses/OpenCLPrintf/OpenCLPrintfResolution.cpp
 +++ b/IGC/Compiler/Optimizer/OpenCLPasses/OpenCLPrintf/OpenCLPrintfResolution.cpp
-@@ -746,7 +746,7 @@ Value* OpenCLPrintfResolution::fixupPrintfArg(CallInst& printfCall, Value* arg,
+@@ -753,7 +753,7 @@ Value* OpenCLPrintfResolution::fixupPrintfArg(CallInst& printfCall, Value* arg,
  
  void OpenCLPrintfResolution::preprocessPrintfArgs(CallInst& printfCall)
  {
@@ -1656,7 +1717,7 @@ index 6042096ba..795b20656 100644
          Value* arg = printfCall.getOperand(i);
          Type* argType = arg->getType();
 diff --git a/IGC/Compiler/Optimizer/OpenCLPasses/RayTracing/ResolveOCLRaytracingBuiltins.cpp b/IGC/Compiler/Optimizer/OpenCLPasses/RayTracing/ResolveOCLRaytracingBuiltins.cpp
-index f97b474f7..13bf3af7a 100644
+index 93bcadd25..fdfbea73c 100644
 --- a/IGC/Compiler/Optimizer/OpenCLPasses/RayTracing/ResolveOCLRaytracingBuiltins.cpp
 +++ b/IGC/Compiler/Optimizer/OpenCLPasses/RayTracing/ResolveOCLRaytracingBuiltins.cpp
 @@ -277,7 +277,7 @@ The return value of this function is a sync object which will be used by the ker
@@ -1755,7 +1816,7 @@ index e07fa1231..785ff59c5 100644
          // let's prepare argument list on new call function
          llvm::Function::arg_iterator new_arg_iter = new_func->arg_begin();
 diff --git a/IGC/Compiler/Optimizer/Scalarizer.cpp b/IGC/Compiler/Optimizer/Scalarizer.cpp
-index c3b6cfcd1..67c33fac5 100644
+index 0b8343bc5..65b93a83b 100644
 --- a/IGC/Compiler/Optimizer/Scalarizer.cpp
 +++ b/IGC/Compiler/Optimizer/Scalarizer.cpp
 @@ -196,7 +196,7 @@ void ScalarizeFunction::buildExclusiveSet()
@@ -1777,7 +1838,7 @@ index c3b6cfcd1..67c33fac5 100644
          {
              Value* operand = CI->getArgOperand(i);
 diff --git a/IGC/Compiler/PromoteResourceToDirectAS.cpp b/IGC/Compiler/PromoteResourceToDirectAS.cpp
-index 4d9ccf20c..b6f6fc3ac 100644
+index 555b1f9a8..596767271 100644
 --- a/IGC/Compiler/PromoteResourceToDirectAS.cpp
 +++ b/IGC/Compiler/PromoteResourceToDirectAS.cpp
 @@ -700,7 +700,7 @@ void PromoteResourceToDirectAS::PromoteBufferToDirectAS(Instruction* inst, Value
@@ -1838,7 +1899,7 @@ index 00a210fea..60efdac2d 100644
  
  StreamEmitter::~StreamEmitter() {
 diff --git a/IGC/GenISAIntrinsics/GenIntrinsicInst.h b/IGC/GenISAIntrinsics/GenIntrinsicInst.h
-index 50217d0bc..4b4df813f 100644
+index 25cd48dff..6036088e6 100644
 --- a/IGC/GenISAIntrinsics/GenIntrinsicInst.h
 +++ b/IGC/GenISAIntrinsics/GenIntrinsicInst.h
 @@ -34,7 +34,6 @@ See LICENSE.TXT for details.
@@ -1883,7 +1944,7 @@ index 50217d0bc..4b4df813f 100644
      static inline bool classof(const GenIntrinsicInst *I) {
          switch(I->getIntrinsicID()) {
 diff --git a/IGC/LLVM3DBuilder/BuiltinsFrontendDefinitions.hpp b/IGC/LLVM3DBuilder/BuiltinsFrontendDefinitions.hpp
-index 7e8074bde..c9f20115f 100644
+index 9bce43d16..ffb45ead7 100644
 --- a/IGC/LLVM3DBuilder/BuiltinsFrontendDefinitions.hpp
 +++ b/IGC/LLVM3DBuilder/BuiltinsFrontendDefinitions.hpp
 @@ -3736,13 +3736,12 @@ inline llvm::Value* LLVM3DBuilder<preserveNames, T, Inserter>::create_wavePrefix
@@ -1943,7 +2004,7 @@ index 67ba8a50d..acc94faa9 100644
    }
  
 diff --git a/IGC/VectorCompiler/lib/Driver/Driver.cpp b/IGC/VectorCompiler/lib/Driver/Driver.cpp
-index cd63f4eac..7660ae438 100644
+index 93d560fb0..9f7962e03 100644
 --- a/IGC/VectorCompiler/lib/Driver/Driver.cpp
 +++ b/IGC/VectorCompiler/lib/Driver/Driver.cpp
 @@ -42,7 +42,6 @@ SPDX-License-Identifier: MIT
@@ -2270,7 +2331,7 @@ index 722e97d13..391329e04 100644
      if (U == Fixed4) {
        Args.push_back(CI->getArgOperand(i));
 diff --git a/IGC/VectorCompiler/lib/GenXCodeGen/GenXLowering.cpp b/IGC/VectorCompiler/lib/GenXCodeGen/GenXLowering.cpp
-index 435bfd090..dd351770d 100644
+index 776a4bf03..3bd0a5d13 100644
 --- a/IGC/VectorCompiler/lib/GenXCodeGen/GenXLowering.cpp
 +++ b/IGC/VectorCompiler/lib/GenXCodeGen/GenXLowering.cpp
 @@ -85,7 +85,6 @@ SPDX-License-Identifier: MIT
@@ -2317,7 +2378,7 @@ index 435bfd090..dd351770d 100644
      Args.push_back(CI->getArgOperand(i));
    }
    Args[PredIdx] = ExpandPredicate(CI, PredIdx, WidenSIMD);
-@@ -3236,7 +3237,7 @@ bool GenXLowering::processInst(Instruction *Inst) {
+@@ -3252,7 +3253,7 @@ bool GenXLowering::processInst(Instruction *Inst) {
      unsigned IntrinsicID = GenXIntrinsic::not_any_intrinsic;
      if (Function *Callee = CI->getCalledFunction()) {
        IntrinsicID = vc::getAnyIntrinsicID(Callee);
@@ -2326,7 +2387,7 @@ index 435bfd090..dd351770d 100644
      }
      if (ST) {
        // use gather/scatter to implement SLM oword load/store on
-@@ -5727,7 +5728,7 @@ bool GenXLowering::widenByteOp(Instruction *Inst) {
+@@ -5743,7 +5744,7 @@ bool GenXLowering::widenByteOp(Instruction *Inst) {
    // Get the range of operands to process.
    unsigned StartIdx = 0, EndIdx = Inst->getNumOperands();
    if (auto CI = dyn_cast<CallInst>(Inst))
@@ -3164,7 +3225,7 @@ index 617e56339..954aa15c7 100644
      PM.add(createPrintModulePass(Output.os()));
    else
 diff --git a/IGC/WrapperLLVM/CMakeLists.txt b/IGC/WrapperLLVM/CMakeLists.txt
-index a543e784e..3e495b453 100644
+index 64bd8d375..61b3e58e3 100644
 --- a/IGC/WrapperLLVM/CMakeLists.txt
 +++ b/IGC/WrapperLLVM/CMakeLists.txt
 @@ -12,6 +12,7 @@ set(IGC_BUILD__PROJ__WrapperLLVM       "${IGC_BUILD__PROJ__WrapperLLVM}" PARENT_
@@ -3185,13 +3246,14 @@ index a543e784e..3e495b453 100644
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/IR/IRBuilder.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/IR/CallSite.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/IR/CFG.h"
-@@ -41,8 +44,13 @@ set(IGC_WrapperLLVM_HDR
+@@ -41,8 +44,14 @@ set(IGC_WrapperLLVM_HDR
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/IR/PassTimingInfo.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/KnownBits.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/Alignment.h"
 +    "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/MathExtras.h"
 +    "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/MemoryBuffer.h"
 +    "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/Regex.h"
++    "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/SystemUtils.h"
 +    "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/TargetRegistry.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Support/TypeSize.h"
      "${CMAKE_CURRENT_SOURCE_DIR}/include/llvmWrapper/Transforms/IPO.h"
@@ -3305,6 +3367,23 @@ index 000000000..96ca46dfe
 +
 +#endif
 \ No newline at end of file
+diff --git a/IGC/WrapperLLVM/include/llvmWrapper/Analysis/AliasAnalysis.h b/IGC/WrapperLLVM/include/llvmWrapper/Analysis/AliasAnalysis.h
+index 873886cc8..f39703e0a 100644
+--- a/IGC/WrapperLLVM/include/llvmWrapper/Analysis/AliasAnalysis.h
++++ b/IGC/WrapperLLVM/include/llvmWrapper/Analysis/AliasAnalysis.h
+@@ -19,6 +19,12 @@ namespace IGCLLVM
+ #else
+   using AliasResultEnum = llvm::AliasResult::Kind;
+ #endif
++
++#if LLVM_VERSION_MAJOR < 14
++  using AAQueryInfo = llvm::AAQueryInfo;
++#else
++  using AAQueryInfo = llvm::SimpleAAQueryInfo;
++#endif
+ }
+ 
+ #endif
 diff --git a/IGC/WrapperLLVM/include/llvmWrapper/IR/Attributes.h b/IGC/WrapperLLVM/include/llvmWrapper/IR/Attributes.h
 new file mode 100644
 index 000000000..6278cfad7
@@ -3703,7 +3782,7 @@ index 71a1aead0..569eece3f 100644
  
  #endif
 diff --git a/IGC/WrapperLLVM/include/llvmWrapper/IR/Instructions.h b/IGC/WrapperLLVM/include/llvmWrapper/IR/Instructions.h
-index 1e6db9344..fa58622a3 100644
+index 1e6db9344..135719a88 100644
 --- a/IGC/WrapperLLVM/include/llvmWrapper/IR/Instructions.h
 +++ b/IGC/WrapperLLVM/include/llvmWrapper/IR/Instructions.h
 @@ -80,6 +80,24 @@ namespace IGCLLVM
@@ -3731,8 +3810,23 @@ index 1e6db9344..fa58622a3 100644
      inline unsigned getArgOperandNo(llvm::CallInst &CI, const llvm::Use *U) {
  #if LLVM_VERSION_MAJOR < 10
        IGC_ASSERT_MESSAGE(CI.isArgOperand(U), "Arg operand # out of range!");
+@@ -95,6 +113,14 @@ namespace IGCLLVM
+         return SVI->getMask();
+ #else
+         return SVI->getShuffleMaskForBitcode();
++#endif
++    }
++
++    inline uint64_t getRetDereferenceableBytes(const llvm::CallInst* CI) {
++#if LLVM_VERSION_MAJOR < 14
++        return CI->getDereferenceableBytes(AttributeList::ReturnIndex);
++#else
++        return CI->getRetDereferenceableBytes();
+ #endif
+     }
+ }
 diff --git a/IGC/WrapperLLVM/include/llvmWrapper/MC/MCContext.h b/IGC/WrapperLLVM/include/llvmWrapper/MC/MCContext.h
-index 3725864ef..3b4abc1cf 100644
+index f3e7e2b4e..06bdf1963 100644
 --- a/IGC/WrapperLLVM/include/llvmWrapper/MC/MCContext.h
 +++ b/IGC/WrapperLLVM/include/llvmWrapper/MC/MCContext.h
 @@ -11,7 +11,7 @@ SPDX-License-Identifier: MIT
