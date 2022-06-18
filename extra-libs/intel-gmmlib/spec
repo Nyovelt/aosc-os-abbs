@@ -1,4 +1,4 @@
-VER=21.2.1
+VER=22.1.3
 SRCS="tbl::https://github.com/intel/gmmlib/archive/intel-gmmlib-$VER.tar.gz"
-CHKSUMS="sha256::912cd86e4cb564b6fa549d69a28b72b9cdcb5a3eab9320955ed70ac37381fc2f"
+CHKSUMS="sha256::81dbb4ddec98bb18c3a038cd40222046ae7f5b24b2d5acbfb2400f39f02f2aaf"
 CHKUPDATE="anitya::id=20342"
