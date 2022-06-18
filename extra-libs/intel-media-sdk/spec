@@ -1,5 +1,4 @@
-VER=20.2.1
-REL=1
+VER=22.4.3
 SRCS="tbl::https://github.com/Intel-Media-SDK/MediaSDK/archive/intel-mediasdk-$VER.tar.gz"
-CHKSUMS="sha256::e13d7d0cf8a4e455ef4032e0cacff63bbbe934a13652ee236ff95d3b9bbb7154"
+CHKSUMS="sha256::edaba06c0d190d8029ae1eed039f3c6c4cdc60ced3fe2e88788659294c31c23c"
 CHKUPDATE="anitya::id=21814"
